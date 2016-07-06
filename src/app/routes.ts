@@ -1,8 +1,8 @@
 import {RouterConfig} from '@angular/router';
 import {HomeComponent} from './home.component';
-import {ShipmentViewComponent} from './shipment-view.component';
-import {ShipmentCreateComponent} from './shipment-create.component';
-import {InventoryViewComponent} from './inventory-view.component';
+import {ShipmentViewComponent} from './shipments/shipment-view.component';
+import {ShipmentCreateComponent} from './shipments/shipment-create.component';
+import {InventoryViewComponent} from './inventory/inventory-view.component';
 
 
 export const routes: RouterConfig = [
