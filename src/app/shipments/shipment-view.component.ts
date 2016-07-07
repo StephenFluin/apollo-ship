@@ -10,10 +10,9 @@ import { ActivatedRoute, Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
     selector: 'shipment-view',
-    template: `<h2>Shipment View</h2>
+    template: `
     <shipment-details [shipment]="shipment | async"></shipment-details>
-    
-    <inventory-view [inventory]="(shipment | async).inventory" [editable]="true"></inventory-view>
+
     `,
     directives: [ShipmentDetailsComponent, InventoryViewComponent],
 })

@@ -12,9 +12,9 @@ export class Shipment {
         this.id = `${id}`;
         this.name = `Shipment ${id}`;
         this.origin = {latitude: 37.418901+Math.random()*1-.5,longitude:-122.079767+Math.random()*1-.5};
-        this.destination = {latitude: 37.77469, longitude:-122.415463 };
+        this.destination = {latitude: 37.77469+Math.random()*1-.5, longitude:-122.415463+Math.random()*1-.5 };
         this.captain = "Zol";
-        this.currentLocation = this.origin;
+        this.currentLocation = {latitude: (this.origin.latitude + this.destination.latitude)/2, longitude: (this.origin.longitude + this.destination.longitude)/2};
         this.inventory = [
             new Product(), 
             {name:"Worthless Cargo",sku:''+Math.round(Math.random()*100000),costToManufacture:2,retailPrice:3,quantity:Math.round(Math.random()*1000)}

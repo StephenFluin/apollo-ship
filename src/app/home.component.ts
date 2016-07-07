@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { ShipmentService } from './shared/shipment.service';
-import { ShipmentDetailsComponent } from './shipments/shipment-details.component';
+import { ShipmentShortComponent } from './shipments/shipment-short.component';
 import { Observable } from 'rxjs/Rx';
 import { Shipment } from './shared/models';
 
@@ -19,7 +19,7 @@ import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
             [title]="shipment.name"
             (markerClick)="selectShipment(shipment.id)">
             <sebm-google-map-info-window>
-                <shipment-details [shipment]="shipment"></shipment-details>
+                <shipment-short [shipment]="shipment"></shipment-short>
             </sebm-google-map-info-window>
         </sebm-google-map-marker>
         
@@ -32,7 +32,7 @@ import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
     <h2>New Shipment</h2>
     <button [routerLink]="['/shipments/create']">Create Shipment</button>
     `,
-    directives: [ROUTER_DIRECTIVES, GOOGLE_MAPS_DIRECTIVES, ShipmentDetailsComponent],
+    directives: [ROUTER_DIRECTIVES, GOOGLE_MAPS_DIRECTIVES, ShipmentShortComponent],
 })
 export class HomeComponent {
     shipments: Observable<Shipment[]>;
@@ -42,8 +42,8 @@ export class HomeComponent {
     lng: number =  -122.079767;
     
     constructor(private shipmentService : ShipmentService) {
-        this.shipments = shipmentService.list();
-        this.anticipatedRevenue = shipmentService.list().map(
+        this.shipments = shipmentService.getList();
+        this.anticipatedRevenue = shipmentService.getList().map(
             shipments => 
                 shipments.reduce(
                     (previous, current) => current.getRevenue() + previous, 0
