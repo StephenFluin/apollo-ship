@@ -13,7 +13,7 @@ import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
     template: `
     <h2>Map</h2>
     <sebm-google-map [latitude]="lat" [longitude]="lng" style="height:300px;">
-        <sebm-google-map-marker *ngFor="let shipment of shipments | async" 
+        <sebm-google-map-marker *ngFor="let shipment of shipments" 
             [latitude]="shipment.currentLocation.latitude" 
             [longitude]="shipment.currentLocation.longitude"
             [title]="shipment.name"
@@ -24,31 +24,28 @@ import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
         </sebm-google-map-marker>
         
     </sebm-google-map>
-    <div *ngFor="let shipment of shipments | async" >
+    <div *ngFor="let shipment of shipments" >
         
     </div>
     <h2>Anticipated Revenue</h2>
-    <div>{{anticipatedRevenue | async | currency:'USD':true:'1.2-2'}}</div>
+    <div>{{anticipatedRevenue | currency:'USD':true:'1.2-2'}}</div>
     <h2>New Shipment</h2>
     <button [routerLink]="['/shipments/create']">Create Shipment</button>
     `,
     directives: [ROUTER_DIRECTIVES, GOOGLE_MAPS_DIRECTIVES, ShipmentShortComponent],
 })
 export class HomeComponent {
-    shipments: Observable<Shipment[]>;
-    anticipatedRevenue: Observable<number>;
+    shipments: Shipment[];
+    anticipatedRevenue: number;
     
     lat: number = 37.418901;
     lng: number =  -122.079767;
     
     constructor(private shipmentService : ShipmentService) {
         this.shipments = shipmentService.getList();
-        this.anticipatedRevenue = shipmentService.getList().map(
-            shipments => 
-                shipments.reduce(
-                    (previous, current) => current.getRevenue() + previous, 0
-                )   
-        );        
+        this.anticipatedRevenue = shipmentService.getList().reduce(
+            (previous, current) => current.getRevenue() + previous, 0
+        );       
     }
     
     selectShipment(event) {

@@ -11,17 +11,21 @@ import { ActivatedRoute, Router, ROUTER_DIRECTIVES } from '@angular/router';
 @Component({
     selector: 'shipment-view',
     template: `
-    <shipment-details [shipment]="shipment | async"></shipment-details>
-
+    <shipment-details [shipment]="shipment"></shipment-details>
+    
     `,
     directives: [ShipmentDetailsComponent, InventoryViewComponent],
 })
 export class ShipmentViewComponent {
-    shipment : Observable<Shipment>;
+    shipment : Shipment;
     constructor(private route : ActivatedRoute, private shipmentService : ShipmentService) {       
-        this.shipment = route.params.flatMap( 
-            params => 
-                shipmentService.get(params['id'])
-        );
+        route.params.map( 
+            params => {
+                console.log("Found a shipment!");
+                this.shipment = shipmentService.get(params['id']);
+                console.log(this.shipment);
+            }
+        ).subscribe(n=>console.log(n));
+        
     }
 }

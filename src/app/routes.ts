@@ -3,6 +3,7 @@ import {HomeComponent} from './home.component';
 import {ShipmentViewComponent} from './shipments/shipment-view.component';
 import {ShipmentCreateComponent} from './shipments/shipment-create.component';
 import {InventoryViewComponent} from './inventory/inventory-view.component';
+import {ProductViewComponent} from './product/product-view.component';
 
 
 export const routes: RouterConfig = [
@@ -13,5 +14,6 @@ export const routes: RouterConfig = [
     { path: 'shipments/create', component: ShipmentCreateComponent},
     { path: 'shipments/:id', component: ShipmentViewComponent},
     { path: 'inventory/:id', component: InventoryViewComponent},
+    { path: 'products/:id', component: ProductViewComponent},
     
 ];
