@@ -8,6 +8,10 @@ import { Shipment } from './shared/models';
 
 import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
 
+import { Apollo } from 'angular2-apollo';
+import gql from 'graphql-tag';
+import { client } from './apollo-client-init';
+
 @Component({
     selector: 'home',
     template: `
@@ -34,20 +38,57 @@ import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
     `,
     directives: [ROUTER_DIRECTIVES, GOOGLE_MAPS_DIRECTIVES, ShipmentShortComponent],
 })
+@Apollo({
+  client,
+  queries() {
+    return {
+      shipments: {
+        query: gql`
+          query getShipments() {
+            shipments {
+              id
+              name
+              origin {
+                latitude
+                longitude
+              }
+              destination {
+                latitude
+                longitude
+              }
+              currentLocation {
+                latitude
+                longitude
+              }
+              captain
+              inventory {
+                name
+                sku
+                costToManufacture
+                retailPrice
+                quantity
+              }
+            }
+          }
+        `
+      }
+    };
+  }
+})
 export class HomeComponent {
     shipments: Shipment[];
     anticipatedRevenue: number;
-    
+
     lat: number = 37.418901;
     lng: number =  -122.079767;
-    
+
     constructor(private shipmentService : ShipmentService) {
-        this.shipments = shipmentService.getList();
+        //this.shipments = shipmentService.getList();
         this.anticipatedRevenue = shipmentService.getList().reduce(
             (previous, current) => current.getRevenue() + previous, 0
-        );       
+        );
     }
-    
+
     selectShipment(event) {
         console.log("Shippment selected:",event);
     }

@@ -8,6 +8,11 @@
 /** Map relative paths to URLs. */
 const map: any = {
   'angular2-google-maps': 'vendor/angular2-google-maps',
+  'angular2-apollo': 'vendor/angular2-apollo/build/src',
+  'apollo-client': 'vendor/apollo-client',
+  'graphql-tag': 'vendor/graphql-tag',
+  'whatwg-fetch': 'vendor/whatwg-fetch',
+  'lodash': 'vendor/lodash'
 };
 
 /** User packages configuration. */
@@ -15,6 +20,26 @@ const packages: any = {
   'angular2-google-maps/core': {
     defaultExtension: 'js',
     main: 'index.js' // you can also use core.umd.js here, if you want faster loads
+  },
+  'angular2-apollo': {
+    defaultExtension: 'js',
+    main: 'index.js'
+  },
+  'apollo-client': {
+    defaultExtension: 'js',
+    main: 'index.js'
+  },
+  'graphql-tag': {
+    defaultExtension: 'js',
+    main: 'index.js'
+  },
+  'whatwg-fetch': {
+    defaultExtension: 'js',
+    main: 'fetch.js'
+  },
+  'lodash': {
+    defaultExtension: 'js',
+    main: 'index.js'
   }
 };
 
@@ -34,6 +59,11 @@ const barrels: string[] = [
 
   // Thirdparty barrels.
   'rxjs',
+  'apollo-client',
+  'angular2-apollo',
+  'graphql-tag',
+  'whatwg-fetch',
+  'lodash',
 
   // App specific barrels.
   'app',

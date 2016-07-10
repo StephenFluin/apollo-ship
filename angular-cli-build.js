@@ -16,7 +16,12 @@ module.exports = function(defaults) {
       'reflect-metadata/**/*.+(ts|js|js.map)',
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
-       'angular2-google-maps/**/*.+(js|js.map)'
+      'angular2-google-maps/**/*.+(js|js.map)',
+      'angular2-apollo/build/src/**/*.+(js|js.map)',
+      'apollo-client/**/*.+(js|js.map)',
+      'graphql-tag/**/*.+(js|js.map)',
+      'whatwg-fetch/**/*.+(js|js.map)',
+      'lodash/**/*.+(js|js.map)'
     ]
   });
 };
