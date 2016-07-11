@@ -17,8 +17,8 @@ import { client } from './apollo-client-init';
     template: `
     <h2>Map</h2>
     <sebm-google-map [latitude]="lat" [longitude]="lng" style="height:300px;">
-        <sebm-google-map-marker *ngFor="let shipment of shipments" 
-            [latitude]="shipment.currentLocation.latitude" 
+        <sebm-google-map-marker *ngFor="let shipment of data.shipments"
+            [latitude]="shipment.currentLocation.latitude"
             [longitude]="shipment.currentLocation.longitude"
             [title]="shipment.name"
             (markerClick)="selectShipment(shipment.id)">
@@ -26,10 +26,10 @@ import { client } from './apollo-client-init';
                 <shipment-short [shipment]="shipment"></shipment-short>
             </sebm-google-map-info-window>
         </sebm-google-map-marker>
-        
+
     </sebm-google-map>
-    <div *ngFor="let shipment of shipments" >
-        
+    <div *ngFor="let shipment of data.shipments" >
+
     </div>
     <h2>Anticipated Revenue</h2>
     <div>{{anticipatedRevenue | currency:'USD':true:'1.2-2'}}</div>
@@ -42,9 +42,9 @@ import { client } from './apollo-client-init';
   client,
   queries() {
     return {
-      shipments: {
+      data: {
         query: gql`
-          query getShipments() {
+          query getShipments {
             shipments {
               id
               name
