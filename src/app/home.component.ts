@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { ShipmentService } from './shared/shipment.service';
 import { ShipmentShortComponent } from './shipments/shipment-short.component';
 import { Observable } from 'rxjs/Rx';
 import { Shipment } from './shared/models';
@@ -13,8 +12,8 @@ import gql from 'graphql-tag';
 import { client } from './apollo-client-init';
 
 @Component({
-    selector: 'home',
-    template: `
+  selector: 'home',
+  template: `
     <h2>Map</h2>
     <sebm-google-map [latitude]="lat" [longitude]="lng" style="height:300px;">
         <sebm-google-map-marker *ngFor="let shipment of data.shipments"
@@ -32,11 +31,11 @@ import { client } from './apollo-client-init';
 
     </div>
     <h2>Anticipated Revenue</h2>
-    <div>{{anticipatedRevenue | currency:'USD':true:'1.2-2'}}</div>
+    <div>{{data.anticipatedRevenue | currency:'USD':true:'1.2-2'}}</div>
     <h2>New Shipment</h2>
     <button [routerLink]="['/shipments/create']">Create Shipment</button>
     `,
-    directives: [ROUTER_DIRECTIVES, GOOGLE_MAPS_DIRECTIVES, ShipmentShortComponent],
+  directives: [ROUTER_DIRECTIVES, GOOGLE_MAPS_DIRECTIVES, ShipmentShortComponent],
 })
 @Apollo({
   client,
@@ -48,6 +47,7 @@ import { client } from './apollo-client-init';
             shipments {
               id
               name
+              revenue
               origin {
                 latitude
                 longitude
@@ -69,6 +69,7 @@ import { client } from './apollo-client-init';
                 quantity
               }
             }
+            anticipatedRevenue
           }
         `
       }
@@ -76,20 +77,15 @@ import { client } from './apollo-client-init';
   }
 })
 export class HomeComponent {
-    shipments: Shipment[];
-    anticipatedRevenue: number;
+  shipments: Shipment[];
+  anticipatedRevenue: number;
 
-    lat: number = 37.418901;
-    lng: number =  -122.079767;
+  lat: number = 37.418901;
+  lng: number =  -122.079767;
 
-    constructor(private shipmentService : ShipmentService) {
-        //this.shipments = shipmentService.getList();
-        this.anticipatedRevenue = shipmentService.getList().reduce(
-            (previous, current) => current.getRevenue() + previous, 0
-        );
-    }
+  constructor() {}
 
-    selectShipment(event) {
-        console.log("Shippment selected:",event);
-    }
+  selectShipment(event) {
+    console.log('Shippment selected:', event);
+  }
 }
