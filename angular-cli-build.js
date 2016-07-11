@@ -19,6 +19,7 @@ module.exports = function(defaults) {
       'angular2-google-maps/**/*.+(js|js.map)',
       'angular2-apollo/build/src/**/*.+(js|js.map)',
       'apollo-client/**/*.+(js|js.map)',
+      'graphql/**/*.+(js|js.map)',
       'graphql-tag/**/*.+(js|js.map)',
       'whatwg-fetch/**/*.+(js|js.map)',
       'lodash/**/*.+(js|js.map)',

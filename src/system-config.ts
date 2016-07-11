@@ -10,6 +10,7 @@ const map: any = {
   'angular2-google-maps': 'vendor/angular2-google-maps',
   'angular2-apollo': 'vendor/angular2-apollo/build/src',
   'apollo-client': 'vendor/apollo-client',
+  'graphql': 'vendor/graphql',
   'graphql-tag': 'vendor/graphql-tag',
   'whatwg-fetch': 'vendor/whatwg-fetch',
   'redux': 'vendor/redux/dist/redux.min.js',
@@ -28,6 +29,10 @@ const packages: any = {
     main: 'index.js'
   },
   'apollo-client': {
+    defaultExtension: 'js',
+    main: 'index.js'
+  },
+  'graphql': {
     defaultExtension: 'js',
     main: 'index.js'
   },
