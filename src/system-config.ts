@@ -14,21 +14,7 @@ const map: any = {
   'whatwg-fetch': 'vendor/whatwg-fetch',
   'redux': 'vendor/redux/dist/redux.min.js',
   'symbol-observable': 'vendor/symbol-observable',
-  'lodash': 'vendor/lodash',
-  'lodash.isundefined': 'vendor/lodash',
-  'lodash.assign': 'vendor/lodash',
-  'lodash.forown': 'vendor/lodash',
-  'lodash.isequal': 'vendor/lodash',
-  'lodash.isarray': 'vendor/lodash',
-  'lodash.isnull': 'vendor/lodash',
-  'lodash.includes': 'vendor/lodash',
-  'lodash.countby': 'vendor/lodash',
-  'lodash.identity': 'vendor/lodash',
-  'lodash.clonedeep': 'vendor/lodash',
-  'lodash.isstring': 'vendor/lodash',
-  'lodash.has': 'vendor/lodash',
-  'lodash.mapvalues': 'vendor/lodash',
-  'lodash.isnumber': 'vendor/lodash'
+  'lodash': 'vendor/lodash'
 };
 
 /** User packages configuration. */
@@ -64,64 +50,42 @@ const packages: any = {
   'lodash': {
     defaultExtension: 'js',
     main: 'index.js'
-  },
-  'lodash.isundefined': {
-    defaultExtension: 'js',
-    main: 'isUndefined.js'
-  },
-  'lodash.assign': {
-    defaultExtension: 'js',
-    main: 'assign.js'
-  },
-  'lodash.forown': {
-    defaultExtension: 'js',
-    main: 'forOwn.js'
-  },
-  'lodash.isequal': {
-    defaultExtension: 'js',
-    main: 'isEqual.js'
-  },
-  'lodash.isarray': {
-    defaultExtension: 'js',
-    main: 'isArray.js'
-  },
-  'lodash.isnull': {
-    defaultExtension: 'js',
-    main: 'isNull.js'
-  },
-  'lodash.clonedeep': {
-    defaultExtension: 'js',
-    main: 'cloneDeep.js'
-  },
-  'lodash.includes': {
-    defaultExtension: 'js',
-    main: 'includes.js'
-  },
-  'lodash.countby': {
-    defaultExtension: 'js',
-    main: 'countBy.js'
-  },
-  'lodash.identity': {
-    defaultExtension: 'js',
-    main: 'identity.js'
-  },
-  'lodash.isstring': {
-    defaultExtension: 'js',
-    main: 'isString.js'
-  },
-  'lodash.has': {
-    defaultExtension: 'js',
-    main: 'has.js'
-  },
-  'lodash.mapvalues': {
-    defaultExtension: 'js',
-    main: 'mapValues.js'
-  },
-  'lodash.isnumber': {
-    defaultExtension: 'js',
-    main: 'isNumber.js'
   }
 };
+
+[
+  'isundefined',
+  'assign',
+  'forown',
+  'isequal',
+  'isarray',
+  'isnull',
+  'includes',
+  'countby',
+  'identity',
+  'clonedeep',
+  'isstring',
+  'has',
+  'mapvalues',
+  'isnumber',
+  'keys',
+  'rest',
+  '_basefor',
+  '_baseiteratee',
+  '_baseclone',
+  '_baseeach',
+  '_basetostring',
+  '_stringtopath',
+  '_root'
+].forEach((name) => {
+  const pkg = `lodash.${name}`;
+
+  map[pkg] = `vendor/${pkg}`;
+  packages[pkg] = {
+    defaultExtension: 'js',
+    main: 'index.js'
+  };
+});
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,12 +104,6 @@ const barrels: string[] = [
 
   // Thirdparty barrels.
   'rxjs',
-  'apollo-client',
-  'angular2-apollo',
-  'graphql-tag',
-  'whatwg-fetch',
-  'redux',
-  'lodash',
 
   // App specific barrels.
   'app',
