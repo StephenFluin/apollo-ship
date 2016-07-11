@@ -21,7 +21,9 @@ module.exports = function(defaults) {
       'apollo-client/**/*.+(js|js.map)',
       'graphql-tag/**/*.+(js|js.map)',
       'whatwg-fetch/**/*.+(js|js.map)',
-      'lodash/**/*.+(js|js.map)'
+      'lodash/**/*.+(js|js.map)',
+      'redux/dist/redux.min.js',
+      'symbol-observable/**/*.+(js|js.map)'
     ]
   });
 };
