@@ -4,7 +4,7 @@ import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import 'whatwg-fetch';
 
 export const client = new ApolloClient({
-  networkInterface: createNetworkInterface('http://localhost:8080/', {
+  networkInterface: createNetworkInterface('http://localhost:8080/graphql', {
     credentials: 'same-origin',
   }),
   shouldBatch: true,

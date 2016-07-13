@@ -30,6 +30,7 @@ const schema = [`
     shipments: [Shipment]
     shipment (id: Int!): Shipment
     products: [Product]
+    anticipatedRevenue: Float
   }
 
   schema {
@@ -56,7 +57,16 @@ const resolvers = {
         new Product,
         new Product
       ]
+    },
+    anticipatedRevenue(){
+      let randomShipments = [
+        new Shipment,
+        new Shipment,
+        new Shipment
+      ];
+      return randomShipments.reduce((previous, current) => current.getRevenue() + previous, 0);
     }
+    //return this.inventory.reduce((previous, current) => previous + (current.retailPrice * current.quantity), 0);
   },
   Shipment: {
     revenue: (o) => o.getRevenue(),
