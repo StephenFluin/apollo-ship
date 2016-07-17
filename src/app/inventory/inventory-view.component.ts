@@ -1,41 +1,61 @@
 import { Component, Input } from '@angular/core';
-import { Product } from '../shared/models';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { Apollo } from 'angular2-apollo';
+
+import { client } from '../apollo-client-init';
+import { ProductShortComponent } from '../product/product-short.component';
+import { InventoryViewQuery } from './inventory-view.interface';
+
+import gql from 'graphql-tag';
 
 @Component({
     selector: 'inventory-view',
     template: `
-    
-    <table>
-    <tr>
-        <th>Name</th><th>SKU</th><th>Cost to Manufacture</th><th>Retail Price</th><th>Quantity</th>
-        <th *ngIf="editable"></th></tr>
-    <tr *ngFor="let item of inventory" [routerLink]="['/products/',item.sku]">
-        <td><a [routerLink]="['/products/',item.sku]">{{item.name}}</a></td>
-        <td>{{item.sku}}</td>
-        <td>{{item.costToManufacture/100 | currency:'USD':'true'}}</td>
-        <td>{{item.retailPrice/100 | currency:'USD':'true'}}</td>
-        <td>{{item.quantity}}</td>
-        <th *ngIf="editable" (click)="delete(item)">Delete</th>
-    </tr>
-    </table>
-    
+      <table *ngIf="!data.loading">
+        <tr>
+          <th>Name</th>
+          <th>SKU</th>
+          <th>Cost to Manufacture</th>
+          <th>Retail Price</th>
+          <th>Quantity</th>
+          <th *ngIf="editable"></th>
+        </tr>
+        <tr *ngFor="let product of data.shipment.inventory">
+          <product-short [sku]="product.sku"></product-short>
+          <th *ngIf="editable" (click)="delete(product)">Delete</th>
+        </tr>
+      </table>
     `,
-    
-    directives: [ ROUTER_DIRECTIVES],
-    
+    directives: [ProductShortComponent],
+})
+@Apollo({
+  client,
+  queries: (component: InventoryViewComponent) => ({
+    data: {
+      query: gql`
+        query getInventory($id: Int!) {
+          shipment(id: $id) {
+            inventory {
+              sku
+            }
+          }
+        }
+      `,
+      variables: {
+        id: component.shipmentId
+      }
+    }
+  })
 })
 export class InventoryViewComponent {
-    @Input() inventory : Product[];
-    @Input() editable : boolean;
-    
-    constructor() {
-        
+    @Input() shipmentId: number;
+    @Input() editable: boolean;
+
+    data: InventoryViewQuery;
+
+    delete(product) {
+      // this.inventory.splice(this.inventory.indexOf(item), 1);
     }
-    delete(item) {
-        this.inventory.splice(this.inventory.indexOf(item),1);
-    }
-    add(item) {
-        this.inventory.push(item);
+    add(product) {
+      // this.inventory.push(item);
     }
 }

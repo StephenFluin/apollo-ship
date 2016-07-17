@@ -1,70 +1,60 @@
 import { Component, Input } from '@angular/core';
-import { Shipment, Product } from '../shared/models';
-import { InventoryViewComponent } from '../inventory/inventory-view.component';
-import { Apollo } from 'angular2-apollo';
-import gql from 'graphql-tag';
-import { client } from '../apollo-client-init';
-
-
 import { ROUTER_DIRECTIVES } from '@angular/router';
+import { Apollo } from 'angular2-apollo';
 
-import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
+import { client } from '../apollo-client-init';
+import { ShipmentMapComponent } from './shipment-map.component';
+import { InventoryViewComponent } from '../inventory/inventory-view.component';
+import { ShipmentDetailsQuery } from './shipment-details.interface';
+import { shipmentInfoFragment } from '../shared/fragments';
+
+import gql from 'graphql-tag';
 
 @Component({
   selector: 'shipment-details',
   template: `
-    <div *ngIf="shipment">
-        <h2>{{shipment.name}}</h2>
-        <sebm-google-map [latitude]="lat" [longitude]="lng" style="height:300px;">
-            <sebm-google-map-marker
-                [latitude]="shipment.origin.latitude"
-                [longitude]="shipment.origin.longitude"
-                [title]="shipment.name"
-                label="O">
-            </sebm-google-map-marker>
-            <sebm-google-map-marker
-                [latitude]="shipment.currentLocation.latitude"
-                [longitude]="shipment.currentLocation.longitude"
-                [title]="shipment.name"
-                label="C">
-            </sebm-google-map-marker>
-            <sebm-google-map-marker
-                [latitude]="shipment.destination.latitude"
-                [longitude]="shipment.destination.longitude"
-                [title]="shipment.name"
-                label="D">
-            </sebm-google-map-marker>
+    <div *ngIf="data.shipment && !data.loading">
+        <h2 *ngIf="!link">{{ data.shipment.name }}</h2>
+        <h2 *ngIf="link"><a [routerLink]="['/shipments', shipmentId]">{{ data.shipment.name }}</a></h2>
+        <shipment-map *ngIf="map" [shipmentId]="shipmentId" [latitude]="lat" [longitude]="lng"></shipment-map>
 
-        </sebm-google-map>
-        <div>Projected Revenue: {{shipment.revenue/100 | currency:'USD':'true'}}</div>
-        <div>Captain: {{shipment.captain}}</div>
-        <inventory-view [inventory]="shipment.inventory" [editable]="true"></inventory-view>
+        <div>Projected Revenue: {{ data.shipment.revenue/100 | currency: 'USD' : 'true' }}</div>
+        <div>Captain: {{ data.shipment.captain }}</div>
+        <inventory-view [shipmentId]="shipmentId" [editable]="editable"></inventory-view>
     </div>
-    <div *ngIf="!shipment">No shipment found with the provided id.</div>
+    <div *ngIf="!data.shipment && !data.loading">No shipment found with the provided id.</div>
     `,
-  directives: [ROUTER_DIRECTIVES, InventoryViewComponent, GOOGLE_MAPS_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, ShipmentMapComponent, InventoryViewComponent],
 })
 @Apollo({
   client,
-  queries: () => ({
+  queries: (component: ShipmentDetailsComponent) => ({
     data: {
       query: gql`
-        getProducts {
-          products {
+        query getShipment($id: Int!) {
+          shipment(id: $id) {
+            #...shipmentInfo
             name
-            sku
-            costToManufacture
-            retailPrice
-            quantity
+            revenue
+            captain
           }
         }
-      `
+      `,
+      variables: {
+        id: component.shipmentId
+      },
+      //fragments: shipmentInfoFragment
     }
   })
 })
 export class ShipmentDetailsComponent {
-  @Input() shipment : Shipment;
+  @Input() shipmentId: number;
+  @Input() map: boolean = true;
+  @Input() editable: boolean = true;
+  @Input() link: boolean = false;
 
   lat: number = 37.418901;
   lng: number =  -122.079767;
+
+  data: ShipmentDetailsQuery;
 }

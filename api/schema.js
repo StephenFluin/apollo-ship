@@ -8,9 +8,9 @@ const schema = [`
   }
 
   type Product {
+    sku: String!
     name: String!
-    sku: String
-    costToManufacture: Float
+    costToManufacture: Float!
     retailPrice: Float!
     quantity: Int!
   }
@@ -27,14 +27,36 @@ const schema = [`
   }
 
   type Query {
+    # Shipments
     shipments: [Shipment]
     shipment (id: Int!): Shipment
+
+    # Products
     products: [Product]
+    product (sku: String!): Product
+
+    # Rest
     anticipatedRevenue: Float
+  }
+
+  type Mutation {
+    addShipment(
+      name: String!,
+      captain: String!
+      skus: [String]!
+    ): Shipment
+
+    addProduct(
+      name: String!
+      costToManufacture: Float!
+      retailPrice: Float!
+      quantity: Int!
+    ): Product
   }
 
   schema {
     query: Query
+    mutation: Mutation
   }
 `];
 
@@ -58,15 +80,41 @@ const resolvers = {
         new Product
       ]
     },
+    product(_, args) {
+      return new Product(args.sku);
+    },
     anticipatedRevenue(){
-      let randomShipments = [
+      var randomShipments = [
         new Shipment,
         new Shipment,
         new Shipment
       ];
       return randomShipments.reduce((previous, current) => current.getRevenue() + previous, 0);
     }
-    //return this.inventory.reduce((previous, current) => previous + (current.retailPrice * current.quantity), 0);
+  },
+  Mutation: {
+    addShipment(_, args) {
+      var shipment = new Shipment;
+
+      shipment.name = args.name;
+      shipment.captain = args.captain;
+
+      shipment.inventory = args.skus.map((sku) => {
+        return new Product(sku);
+      });ta
+
+      return shipment;
+    },
+    addProduct(_, args) {
+      var product = new Product;
+
+      product.name = args.name;
+      product.costToManufacture = args.costToManufacture;
+      product.retailPrice = args.retailPrice;
+      product.quantity = args.quantity;
+
+      return product;
+    }
   },
   Shipment: {
     revenue: (o) => o.getRevenue(),

@@ -23,8 +23,8 @@ function Shipment(id) {
   this.inventory = [
       new Product(),
       {
-        name: 'Worthless Cargo',
         sku: '' + Math.round(Math.random()*100000),
+        name: 'Worthless Cargo',
         costToManufacture: 2,
         retailPrice: 3,
         quantity: Math.round(Math.random()*1000)
@@ -38,9 +38,9 @@ function Shipment(id) {
   }
 }
 
-function Product() {
+function Product(sku) {
   this.name = 'Precious Cargo';
-  this.sku = '' + Math.round(Math.random()*10000000);
+  this.sku = sku ? sku : '' + Math.round(Math.random()*10000000);
   this.costToManufacture = 399;
   this.retailPrice = 499;
   this.quantity = 1;
