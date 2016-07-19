@@ -1,91 +1,36 @@
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { ShipmentShortComponent } from './shipments/shipment-short.component';
-import { Observable } from 'rxjs/Rx';
-import { Shipment } from './shared/models';
 
-
-import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
-
-import { Apollo } from 'angular2-apollo';
-import gql from 'graphql-tag';
-import { client } from './apollo-client-init';
+import { ShipmentsMapComponent } from './shipments/shipments-map.component';
+import { ShipmentsListComponent } from './shipments/shipments-list.component';
+import { RevenueReportComponent } from './shipments/revenue-report.component';
 
 @Component({
   selector: 'home',
   template: `
     <h2>Map</h2>
-    <sebm-google-map [latitude]="lat" [longitude]="lng" style="height:300px;">
-        <sebm-google-map-marker *ngFor="let shipment of data.shipments"
-            [latitude]="shipment.currentLocation.latitude"
-            [longitude]="shipment.currentLocation.longitude"
-            [title]="shipment.name"
-            (markerClick)="selectShipment(shipment.id)">
-            <sebm-google-map-info-window>
-                <shipment-short [shipment]="shipment"></shipment-short>
-            </sebm-google-map-info-window>
-        </sebm-google-map-marker>
+    <shipments-map [latitude]="lat" [longitude]="lng"></shipments-map>
 
-    </sebm-google-map>
-    <div *ngFor="let shipment of data.shipments" >
+    <h2>Shipments List</h2>
+    <shipments-list></shipments-list>
 
-    </div>
     <h2>Anticipated Revenue</h2>
-    <div>{{data.anticipatedRevenue | currency:'USD':true:'1.2-2'}}</div>
+    <revenue-report></revenue-report>
+
     <h2>New Shipment</h2>
     <button [routerLink]="['/shipments/create']">Create Shipment</button>
+
+    <h2>New Product</h2>
+    <button [routerLink]="['/products/create']">Create Product</button>
     `,
-  directives: [ROUTER_DIRECTIVES, GOOGLE_MAPS_DIRECTIVES, ShipmentShortComponent],
-})
-@Apollo({
-  client,
-  queries() {
-    return {
-      data: {
-        query: gql`
-          query getShipments {
-            shipments {
-              id
-              name
-              revenue
-              origin {
-                latitude
-                longitude
-              }
-              destination {
-                latitude
-                longitude
-              }
-              currentLocation {
-                latitude
-                longitude
-              }
-              captain
-              inventory {
-                name
-                sku
-                costToManufacture
-                retailPrice
-                quantity
-              }
-            }
-            anticipatedRevenue
-          }
-        `
-      }
-    };
-  }
+  directives: [
+    ROUTER_DIRECTIVES,
+    ShipmentsMapComponent,
+    RevenueReportComponent,
+    ShipmentsListComponent
+  ],
 })
 export class HomeComponent {
-  shipments: Shipment[];
-  anticipatedRevenue: number;
-
   lat: number = 37.418901;
   lng: number =  -122.079767;
-
-  constructor() {}
-
-  selectShipment(event) {
-    console.log('Shippment selected:', event);
-  }
 }

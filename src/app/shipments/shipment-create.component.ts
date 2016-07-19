@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
-import { Shipment } from '../shared/models';
-import { InventoryViewComponent } from '../inventory/inventory-view.component';
 import { Router } from '@angular/router';
 import { Apollo } from 'angular2-apollo';
-import gql from 'graphql-tag';
-import { GraphQLResult } from 'graphql';
+import { ApolloQueryResult } from 'apollo-client';
+
+import { InventorySelectComponent } from '../inventory/inventory-select.component';
+import { Shipment } from '../shared/models';
 import { client } from '../apollo-client-init';
+
+import gql from 'graphql-tag';
 
 @Component({
   selector: 'shipment-create',
-  template: `<h2>New Shipment</h2>
+  template: `
+    <h2>New Shipment</h2>
 
+    <div><input [(ngModel)]="shipment.name" placeholder="Name"></div>
+    <div><input [(ngModel)]="shipment.captain" placeholder="Captain"></div>
 
-    <div><input [(ngModel)]="shipment.name"></div>
-    <div><input [(ngModel)]="shipment.captain"></div>
-    <inventory-view [inventory]="shipment.inventory" [editable]="true"></inventory-view>
+    <inventory-select (add)="onAdd($event)" (remove)="onRemove($event)"></inventory-select>
+
     <button (click)="save()">Create</button>
-
-    `,
-  directives: [InventoryViewComponent],
+  `,
+  directives: [InventorySelectComponent],
 })
 @Apollo({
   client,
@@ -29,14 +32,17 @@ import { client } from '../apollo-client-init';
           mutation addShipment(
             $name: String!
             $captain: String!
-            $inventory: Product[]!
+            $skus: [String]!
           ) {
             addShipment(
               name: $name
               captain: $captain
-              inventory: $inventory
+              skus: $skus
             ) {
               id
+              inventory {
+                sku
+              }
             }
           }
         `,
@@ -46,15 +52,26 @@ import { client } from '../apollo-client-init';
   }
 })
 export class ShipmentCreateComponent {
-  shipment : Shipment;
-  add: () => Promise<GraphQLResult>;
+  shipment: Shipment = new Shipment();
+  add: () => Promise<ApolloQueryResult>;
 
-  constructor(private router : Router ) {
-    this.shipment = new Shipment(Math.round(Math.random()*100000));
-  }
+  constructor(private router: Router ) {}
 
   save() {
-    this.add();
-    this.router.navigateByUrl('/');
+    this.add()
+      .then(() => {
+        this.router.navigateByUrl('/');
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }
+
+  onAdd(product) {
+    this.shipment.addProduct(product);
+  }
+
+  onRemove(product) {
+    this.shipment.removeProduct(product);
   }
 }
