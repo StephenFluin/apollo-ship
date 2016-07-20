@@ -15,7 +15,8 @@ const map: any = {
   'whatwg-fetch': 'vendor/whatwg-fetch',
   'redux': 'vendor/redux/dist/redux.min.js',
   'symbol-observable': 'vendor/symbol-observable',
-  'lodash': 'vendor/lodash'
+  'lodash': 'vendor/lodash',
+  '@angular2-material': 'vendor/@angular2-material',
 };
 
 /** User packages configuration. */
@@ -57,6 +58,17 @@ const packages: any = {
     main: 'index.js'
   }
 };
+
+const materialPkgs:string[] = [
+  'core',
+  'button',
+  'card',
+  'toolbar',
+];
+
+materialPkgs.forEach((pkg) => {
+  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+});
 
 [
   'isundefined',

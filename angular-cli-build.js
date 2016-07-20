@@ -25,7 +25,8 @@ module.exports = function(defaults) {
       'lodash/**/*.+(js|js.map)',
       'lodash.**/**/*.+(js|js.map)',
       'redux/dist/redux.min.js',
-      'symbol-observable/**/*.+(js|js.map)'
+      'symbol-observable/**/*.+(js|js.map)',
+      '@angular2-material/**/*'
     ]
   });
 };
