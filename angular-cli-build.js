@@ -24,7 +24,6 @@ module.exports = function(defaults) {
       'whatwg-fetch/**/*.+(js|js.map)',
       'lodash/**/*.+(js|js.map)',
       'lodash.**/**/*.+(js|js.map)',
-      'lodash.flatten/*.+(js|js.map)',
       'redux/dist/redux.min.js',
       'symbol-observable/**/*.+(js|js.map)'
     ]
