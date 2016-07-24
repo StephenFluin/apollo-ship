@@ -15,7 +15,9 @@ const map: any = {
   'whatwg-fetch': 'vendor/whatwg-fetch',
   'redux': 'vendor/redux/dist/redux.min.js',
   'symbol-observable': 'vendor/symbol-observable',
-  'lodash': 'vendor/lodash'
+  'lodash': 'vendor/lodash',
+  'lodash.flatten': 'vendor/lodash.flatten',
+  'lodash.isobject': 'vendor/lodash.isobject'
 };
 
 /** User packages configuration. */
@@ -53,6 +55,14 @@ const packages: any = {
     main: 'index.js'
   },
   'lodash': {
+    defaultExtension: 'js',
+    main: 'index.js'
+  },
+  'lodash.flatten': {
+    defaultExtension: 'js',
+    main: 'index.js'
+  },
+  'lodash.isobject': {
     defaultExtension: 'js',
     main: 'index.js'
   }
