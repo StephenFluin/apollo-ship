@@ -15,7 +15,8 @@ const map: any = {
   'whatwg-fetch': 'vendor/whatwg-fetch',
   'redux': 'vendor/redux/dist/redux.min.js',
   'symbol-observable': 'vendor/symbol-observable',
-  'lodash': 'vendor/lodash'
+  'lodash': 'vendor/lodash',
+  '@angular2-material': 'vendor/@angular2-material',
 };
 
 /** User packages configuration. */
@@ -58,31 +59,44 @@ const packages: any = {
   }
 };
 
+const materialPkgs:string[] = [
+  'core',
+  'button',
+  'card',
+  'toolbar',
+];
+
+materialPkgs.forEach((pkg) => {
+  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+});
+
 [
-  'isundefined',
   'assign',
-  'forown',
-  'forin',
-  'isequal',
-  'isarray',
-  'isnull',
-  'includes',
   'countby',
-  'identity',
   'clonedeep',
-  'isstring',
+  'flatten',
+  'forin',
+  'forown',
   'has',
+  'identity',
+  'includes',
+  'isarray',
+  'isequal',
+  'isnull',
+  'isnumber',
+  'isobject',
+  'isstring',
+  'isundefined',
+  'keys',
   'keysin',
   'mapvalues',
   'pick',
-  'isnumber',
-  'keys',
   'rest',
-  '_basefor',
-  '_baseiteratee',
   '_baseclone',
   '_baseeach',
   '_baseflatten',
+  '_basefor',
+  '_baseiteratee',
   '_basetostring',
   '_stringtopath',
   '_root'
