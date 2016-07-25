@@ -1,5 +1,6 @@
 const Shipment = require('./mocks').Shipment;
 const Product = require('./mocks').Product;
+const knex = require('./knex');
 
 const schema = [`
   type Location {
@@ -63,14 +64,16 @@ const schema = [`
 const resolvers = {
   Query: {
     shipments() {
-      return [
-        new Shipment,
-        new Shipment,
-        new Shipment
-      ];
+      return knex
+        .select()
+        .table('shipments');
     },
     shipment(_, args) {
-      return new Shipment(args.id);
+      return knex
+        .select()
+        .table('shipments')
+        .where('id', args.id)
+        .first();
     },
     products() {
       return [
@@ -89,21 +92,63 @@ const resolvers = {
         new Shipment,
         new Shipment
       ];
-      return randomShipments.reduce((previous, current) => current.getRevenue() + previous, 0);
+
+      return knex
+        .select(['revenue'])
+        .table('shipments').then((shipments) => {
+          shipments.reduce((previous, current) => current.revenue + previous, 0);
+        });
     }
   },
   Mutation: {
     addShipment(_, args) {
-      var shipment = new Shipment;
 
+      var shipment = new Shipment;
       shipment.name = args.name;
       shipment.captain = args.captain;
 
-      shipment.inventory = args.skus.map((sku) => {
-        return new Product(sku);
-      });ta
+      var locations = {
+        origin: null,
+        destination: null,
+        currentLocation: null,
+      };
 
-      return shipment;
+      return Promise.all([
+        // Origin
+        knex('locations')
+          .insert(shipment.origin)
+          .then((result) => {
+            locations.origin = result[0];
+          }),
+        // Destination
+        knex('locations')
+          .insert(shipment.destination)
+          .then((result) => {
+            locations.destination = result[0];
+          }),
+        // CurrentLocation
+        knex('locations')
+          .insert(shipment.currentLocation)
+          .then((result) => {
+            locations.currentLocation = result[0];
+          })
+      ]).then(() => {
+        return knex('shipments')
+          .insert({
+            name: shipment.name,
+            captain: shipment.captain,
+            revenue: shipment.getRevenue(),
+            origin: locations.origin,
+            destination: locations.destination,
+            current_location: locations.currentLocation,
+          });
+      });
+
+      //shipment.inventory = args.skus.map((sku) => {
+      //  return new Product(sku);
+      //});
+      //
+      //return shipment;
     },
     addProduct(_, args) {
       var product = new Product;
@@ -117,10 +162,9 @@ const resolvers = {
     }
   },
   Shipment: {
-    revenue: (o) => o.getRevenue(),
-    origin: property('origin'),
-    destination: property('destination'),
-    currentLocation: property('currentLocation'),
+    origin: (_, args) => getLocation('origin', args.id || _.id),
+    destination: (_, args) => getLocation('destination', args.id || _.id),
+    currentLocation: (_, args) => getLocation('current_location', args.id || _.id),
     inventory: property('inventory'),
   }
 };
@@ -133,3 +177,17 @@ module.exports = {
   schema,
   resolvers
 };
+
+
+function getLocation(type, id) {
+  return knex
+    .select(['locations.latitude', 'locations.longitude'])
+    .table('shipments')
+    .leftJoin('locations', 'shipments.' + type, 'locations.id')
+    .where('id', id)
+    .first()
+    .then((result) => {
+      console.log(result);
+      return result;
+    });
+}

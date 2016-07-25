@@ -3,25 +3,23 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('shipments', function (table) {
       table.increments();
-      table.timestamps();
-      table.string('posted_by');
-      table.text('content');
-      table.string('repository_name');
-      /*name: String!
-      revenue: Float
-      captain: String
-      origin: Location
-      destination: Location
-      currentLocation: Location
-      inventory: [Product]*/
-    })
+      table.string('name');
+      table.float('revenue');
+      table.string('captain');
+      table.integer('origin');
+      table.integer('destination');
+      table.integer('current_location');
+    }),
+    knex.schema.createTable('locations', function (table) {
+      table.increments();
+      table.float('latitude');
+      table.float('longitude');
+    }),
   ]);
 };
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('comments'),
-    knex.schema.dropTable('entries'),
-    knex.schema.dropTable('votes'),
+    knex.schema.dropTable('shipments'),
   ]);
 };
