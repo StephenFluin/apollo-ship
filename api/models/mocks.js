@@ -1,3 +1,7 @@
+'use strict';
+
+const fake = require('casual');
+
 function Shipment(id) {
   this.id = id ? id : Math.round(Math.random()*1000);
 
@@ -39,11 +43,11 @@ function Shipment(id) {
 }
 
 function Product(sku) {
-  this.name = 'Precious Cargo';
+  this.name = fake.company_name;
   this.sku = sku ? sku : '' + Math.round(Math.random()*10000000);
-  this.costToManufacture = 399;
-  this.retailPrice = 499;
-  this.quantity = 1;
+  this.costToManufacture = fake.double(50, 500);
+  this.retailPrice = this.costToManufacture + fake.double(50, 200);
+  this.quantity = fake.integer(1, 10);
 }
 
 module.exports = {

@@ -11,7 +11,7 @@ import { ShipmentDetailsComponent } from './shipment-details.component';
   directives: [ShipmentDetailsComponent],
 })
 export class ShipmentViewComponent {
-  id: number;
+  id: string;
 
   constructor(route: ActivatedRoute) {
     route.params.subscribe((params: any) => {

@@ -20,7 +20,7 @@ import gql from 'graphql-tag';
   queries: (component: ShipmentShortWithDataComponent) => ({
     data: {
       query: gql`
-        query getShipment($id: Int!) {
+        query getShipment($id: String!) {
           shipment(id: $id) {
             id
             #...shipmentInfo
