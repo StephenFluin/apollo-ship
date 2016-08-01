@@ -7,7 +7,7 @@ class FlightAware {
     return this._request('Enroute', {
       airport: 'KSFO',
       howMany: 20,
-      filter: '',
+      filter: 'airline',
       offset: 0
     })
       .then((result) => {
@@ -20,22 +20,31 @@ class FlightAware {
     return this._request('FlightInfo', {
       ident,
       howMany: 1
-    }).then((result) => {
-      return result.FlightInfoResult.flights[0];
-    });
+    })
+      .then((result) => result.FlightInfoResult.flights[0]);
   }
 
-  location(ident) {
+  flightLocation(ident) {
     return this._request('InFlightInfo', {
       ident
-    }).then((result) => {
-      console.log('InFlightInfo', result);
-      return result;
-    });
+    })
+      .then((result) => result.InFlightInfoResult)
+      .then(this._getLocation);
   }
 
-  airport() {
+  airportLocation(airportCode) {
+    return this._request('AirportInfo', {
+      airportCode
+    })
+      .then((result) => result.AirportInfoResult)
+      .then(this._getLocation);
+  }
 
+  _getLocation(data) {
+    return {
+      latitude: data.latitude,
+      longitude: data.longitude
+    };
   }
 
   _request(type, query) {

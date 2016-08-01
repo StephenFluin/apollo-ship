@@ -103,9 +103,9 @@ const resolvers = {
     }
   },
   Shipment: {
-    origin: property('origin'),
-    destination: property('destination'),
-    currentLocation: property('currentLocation'),
+    origin: (_, args, context) => context.Shipments.origin(_.origin),
+    destination: (_, args, context) => context.Shipments.destination(_.destination),
+    currentLocation: (_, args, context) => context.Shipments.currentLocation(_.currentLocation),
     inventory: property('inventory'),
   }
 };

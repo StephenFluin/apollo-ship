@@ -16,6 +16,18 @@ class Shipments {
     return this.flightAware.flight(id).then(this._flightToShipment);
   }
 
+  origin(airportCode) {
+    return this.flightAware.airportLocation(airportCode);
+  }
+
+  destination(airportCode) {
+    return this.flightAware.airportLocation(airportCode);
+  }
+
+  currentLocation(ident) {
+    return this.flightAware.flightLocation(ident);
+  }
+
   _flightToShipment(flight) {
     const mock = new ShipmentMock();
 
@@ -24,9 +36,9 @@ class Shipments {
       name: 'Flight ' + flight.ident,
       revenue: mock.getRevenue(),
       captain: flight.aircrafttype,
-      origin: mock.origin,
-      destination: mock.destination,
-      currentLocation: mock.currentLocation,
+      origin: flight.origin,
+      destination: flight.destination,
+      currentLocation: flight.ident,
       inventory: mock.inventory
     };
   }
