@@ -1,5 +1,8 @@
 'use strict';
 
+const ShipmentMock = require('./models/mocks').Shipment;
+const ProducttMock = require('./models/mocks').Product;
+
 const schema = [`
   type Location {
     latitude: Float!
@@ -81,7 +84,7 @@ const resolvers = {
   },
   Mutation: {
     addShipment(_, args, context) {
-      var shipment = context.Shipments.single();
+      var shipment = new ShipmentMock();
       shipment.name = args.name;
       shipment.captain = args.captain;
 
@@ -92,7 +95,7 @@ const resolvers = {
       return shipment;
     },
     addProduct(_, args, context) {
-      var product = context.Products.single();
+      var product = new ProducttMock();
 
       product.name = args.name;
       product.costToManufacture = args.costToManufacture;
