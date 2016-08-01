@@ -77,9 +77,7 @@ const resolvers = {
       return context.Products.single(args.sku);
     },
     anticipatedRevenue(_, args, context){
-      var randomShipments = context.Shipments.all();
-
-      return randomShipments.reduce((previous, current) => current.revenue + previous, 0);
+      return context.Products.revenue();
     }
   },
   Mutation: {
@@ -109,7 +107,7 @@ const resolvers = {
     origin: (_, args, context) => context.Shipments.origin(_.origin),
     destination: (_, args, context) => context.Shipments.destination(_.destination),
     currentLocation: (_, args, context) => context.Shipments.currentLocation(_.currentLocation),
-    inventory: property('inventory'),
+    inventory: (_, args, context) => context.Products.of(_.id),
   }
 };
 
