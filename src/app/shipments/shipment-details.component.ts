@@ -31,7 +31,7 @@ import gql from 'graphql-tag';
   queries: (component: ShipmentDetailsComponent) => ({
     data: {
       query: gql`
-        query getShipment($id: Int!) {
+        query getShipment($id: String!) {
           shipment(id: $id) {
             #...shipmentInfo
             name
@@ -48,7 +48,7 @@ import gql from 'graphql-tag';
   })
 })
 export class ShipmentDetailsComponent {
-  @Input() shipmentId: number;
+  @Input() shipmentId: string;
   @Input() map: boolean = true;
   @Input() editable: boolean = true;
   @Input() link: boolean = false;

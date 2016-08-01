@@ -1,5 +1,4 @@
-const Shipment = require('./mocks').Shipment;
-const Product = require('./mocks').Product;
+'use strict';
 
 const schema = [`
   type Location {
@@ -16,7 +15,7 @@ const schema = [`
   }
 
   type Shipment {
-    id: Int!
+    id: String!
     name: String!
     revenue: Float
     captain: String
@@ -29,7 +28,7 @@ const schema = [`
   type Query {
     # Shipments
     shipments: [Shipment]
-    shipment (id: Int!): Shipment
+    shipment (id: String!): Shipment
 
     # Products
     products: [Product]
@@ -62,51 +61,38 @@ const schema = [`
 
 const resolvers = {
   Query: {
-    shipments() {
-      return [
-        new Shipment,
-        new Shipment,
-        new Shipment
-      ];
+    shipments(_, args, context) {
+      return context.Shipments.all();
     },
-    shipment(_, args) {
-      return new Shipment(args.id);
+    shipment(_, args, context) {
+      return context.Shipments.single(args.id);
     },
-    products() {
-      return [
-        new Product,
-        new Product,
-        new Product,
-        new Product
-      ]
+    products(_, args, context) {
+      return context.Products.all();
     },
-    product(_, args) {
-      return new Product(args.sku);
+    product(_, args, context) {
+      return context.Products.single(args.sku);
     },
-    anticipatedRevenue(){
-      var randomShipments = [
-        new Shipment,
-        new Shipment,
-        new Shipment
-      ];
-      return randomShipments.reduce((previous, current) => current.getRevenue() + previous, 0);
+    anticipatedRevenue(_, args, context){
+      var randomShipments = context.Shipments.all();
+
+      return randomShipments.reduce((previous, current) => current.revenue + previous, 0);
     }
   },
   Mutation: {
-    addShipment(_, args) {
-      var shipment = new Shipment;
-
+    addShipment(_, args, context) {
+      var shipment = context.Shipments.single();
       shipment.name = args.name;
       shipment.captain = args.captain;
 
       shipment.inventory = args.skus.map((sku) => {
-        return new Product(sku);
-      });ta
+        return context.Products.single(sku);
+      });
 
       return shipment;
     },
-    addProduct(_, args) {
-      var product = new Product;
+    addProduct(_, args, context) {
+      var product = context.Products.single();
 
       product.name = args.name;
       product.costToManufacture = args.costToManufacture;
@@ -117,7 +103,6 @@ const resolvers = {
     }
   },
   Shipment: {
-    revenue: (o) => o.getRevenue(),
     origin: property('origin'),
     destination: property('destination'),
     currentLocation: property('currentLocation'),
@@ -125,11 +110,11 @@ const resolvers = {
   }
 };
 
-function property(key) {
-  return (o) => o[key];
-}
-
 module.exports = {
   schema,
   resolvers
 };
+
+function property(key) {
+  return (o) => o[key];
+}

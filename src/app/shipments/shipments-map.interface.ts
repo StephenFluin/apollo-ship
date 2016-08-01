@@ -3,7 +3,7 @@ import { ApolloQuery } from 'angular2-apollo';
 import { Location } from '../shared/interfaces';
 
 interface Shipment {
-  id: number;
+  id: string;
   name: string;
   currentLocation: Location;
 }

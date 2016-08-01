@@ -1,3 +1,5 @@
+'use strict';
+
 function Shipment(id) {
   this.id = id ? id : Math.round(Math.random()*1000);
 

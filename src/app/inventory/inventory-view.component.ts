@@ -32,7 +32,7 @@ import gql from 'graphql-tag';
   queries: (component: InventoryViewComponent) => ({
     data: {
       query: gql`
-        query getInventory($id: Int!) {
+        query getInventory($id: String!) {
           shipment(id: $id) {
             inventory {
               sku
@@ -47,7 +47,7 @@ import gql from 'graphql-tag';
   })
 })
 export class InventoryViewComponent {
-    @Input() shipmentId: number;
+    @Input() shipmentId: string;
     @Input() editable: boolean;
 
     data: InventoryViewQuery;

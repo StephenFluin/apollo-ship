@@ -1,7 +1,7 @@
 import { ApolloQuery } from 'angular2-apollo';
 
 interface Shipments {
-  id: number;
+  id: string;
 }
 
 export interface ShipmentsListQuery extends ApolloQuery {
