@@ -42,9 +42,8 @@ const schema = [`
   }
 
   type Mutation {
-    addShipment(
-      name: String!,
-      captain: String!
+    addProductsToShipment(
+      id: String!,
       skus: [String]!
     ): Shipment
 
@@ -81,26 +80,19 @@ const resolvers = {
     }
   },
   Mutation: {
-    addShipment(_, args, context) {
-      var shipment = new ShipmentMock();
-      shipment.name = args.name;
-      shipment.captain = args.captain;
+    addProductsToShipment(_, args, context) {
+      var id = args.id;
+      var skus = args.skus;
 
-      shipment.inventory = args.skus.map((sku) => {
-        return context.Products.single(sku);
-      });
-
-      return shipment;
+      return context.Shipments.create(id, skus);
     },
     addProduct(_, args, context) {
-      var product = new ProducttMock();
-
-      product.name = args.name;
-      product.costToManufacture = args.costToManufacture;
-      product.retailPrice = args.retailPrice;
-      product.quantity = args.quantity;
-
-      return product;
+      return context.Products
+        .create(args)
+        .then((sku) => {
+          return context.Products.single(sku)
+            .then((result) => result[0])
+        });
     }
   },
   Shipment: {
@@ -108,6 +100,10 @@ const resolvers = {
     destination: (_, args, context) => context.Shipments.destination(_.destination),
     currentLocation: (_, args, context) => context.Shipments.currentLocation(_.currentLocation),
     inventory: (_, args, context) => context.Products.of(_.id),
+  },
+  Product: {
+    costToManufacture: property('cost_to_manufacture'),
+    retailPrice: property('retail_price'),
   }
 };
 

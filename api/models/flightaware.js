@@ -21,7 +21,11 @@ class FlightAware {
       ident,
       howMany: 1
     })
-      .then((result) => result.FlightInfoResult.flights[0]);
+      .then((result) => {
+        if(result && result.FlightInfoResult) {
+          return result.FlightInfoResult.flights[0];
+        }
+      });
   }
 
   flightLocation(ident) {
@@ -66,5 +70,6 @@ class FlightAware {
 FlightAware.url = 'http://flightxml.flightaware.com/json/FlightXML2/';
 FlightAware.username = 'kamilkisiela';
 FlightAware.apiKey = '--api-key--';
+FlightAware.apiKey = '73ac258f4e1d7dd56293462cdac123edf949f6fc';
 
 module.exports = FlightAware;
