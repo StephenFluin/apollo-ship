@@ -40,7 +40,7 @@ import gql from 'graphql-tag';
   queries: (component: ShipmentMapComponent) => ({
     data: {
       query: gql`
-        query getShipment($id: Int!) {
+        query getShipment($id: String!) {
           shipment(id: $id) {
             name
             origin {
@@ -65,7 +65,7 @@ import gql from 'graphql-tag';
   })
 })
 export class ShipmentMapComponent {
-  @Input() shipmentId: number;
+  @Input() shipmentId: string;
   @Input() latitude: number;
   @Input() longitude: number;
 

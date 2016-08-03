@@ -1,5 +1,7 @@
-const Shipment = require('./mocks').Shipment;
-const Product = require('./mocks').Product;
+'use strict';
+
+const ShipmentMock = require('./models/mocks').Shipment;
+const ProducttMock = require('./models/mocks').Product;
 
 const schema = [`
   type Location {
@@ -16,7 +18,7 @@ const schema = [`
   }
 
   type Shipment {
-    id: Int!
+    id: String!
     name: String!
     revenue: Float
     captain: String
@@ -29,7 +31,7 @@ const schema = [`
   type Query {
     # Shipments
     shipments: [Shipment]
-    shipment (id: Int!): Shipment
+    shipment (id: String!): Shipment
 
     # Products
     products: [Product]
@@ -40,9 +42,8 @@ const schema = [`
   }
 
   type Mutation {
-    addShipment(
-      name: String!,
-      captain: String!
+    addProductsToShipment(
+      id: String!,
       skus: [String]!
     ): Shipment
 
@@ -62,74 +63,55 @@ const schema = [`
 
 const resolvers = {
   Query: {
-    shipments() {
-      return [
-        new Shipment,
-        new Shipment,
-        new Shipment
-      ];
+    shipments(_, args, context) {
+      return context.Shipments.all();
     },
-    shipment(_, args) {
-      return new Shipment(args.id);
+    shipment(_, args, context) {
+      return context.Shipments.single(args.id);
     },
-    products() {
-      return [
-        new Product,
-        new Product,
-        new Product,
-        new Product
-      ]
+    products(_, args, context) {
+      return context.Products.all();
     },
-    product(_, args) {
-      return new Product(args.sku);
+    product(_, args, context) {
+      return context.Products.single(args.sku);
     },
-    anticipatedRevenue(){
-      var randomShipments = [
-        new Shipment,
-        new Shipment,
-        new Shipment
-      ];
-      return randomShipments.reduce((previous, current) => current.getRevenue() + previous, 0);
+    anticipatedRevenue(_, args, context){
+      return context.Products.revenue();
     }
   },
   Mutation: {
-    addShipment(_, args) {
-      var shipment = new Shipment;
+    addProductsToShipment(_, args, context) {
+      var id = args.id;
+      var skus = args.skus;
 
-      shipment.name = args.name;
-      shipment.captain = args.captain;
-
-      shipment.inventory = args.skus.map((sku) => {
-        return new Product(sku);
-      });ta
-
-      return shipment;
+      return context.Shipments.create(id, skus);
     },
-    addProduct(_, args) {
-      var product = new Product;
-
-      product.name = args.name;
-      product.costToManufacture = args.costToManufacture;
-      product.retailPrice = args.retailPrice;
-      product.quantity = args.quantity;
-
-      return product;
+    addProduct(_, args, context) {
+      return context.Products
+        .create(args)
+        .then((sku) => {
+          return context.Products.single(sku)
+            .then((result) => result[0])
+        });
     }
   },
   Shipment: {
-    revenue: (o) => o.getRevenue(),
-    origin: property('origin'),
-    destination: property('destination'),
-    currentLocation: property('currentLocation'),
-    inventory: property('inventory'),
+    origin: (_, args, context) => context.Shipments.origin(_.origin),
+    destination: (_, args, context) => context.Shipments.destination(_.destination),
+    currentLocation: (_, args, context) => context.Shipments.currentLocation(_.currentLocation),
+    inventory: (_, args, context) => context.Products.of(_.id),
+  },
+  Product: {
+    costToManufacture: property('cost_to_manufacture'),
+    retailPrice: property('retail_price'),
   }
 };
-
-function property(key) {
-  return (o) => o[key];
-}
 
 module.exports = {
   schema,
   resolvers
 };
+
+function property(key) {
+  return (o) => o[key];
+}

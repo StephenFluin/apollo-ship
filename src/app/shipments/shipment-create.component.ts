@@ -4,7 +4,7 @@ import { Apollo } from 'angular2-apollo';
 import { ApolloQueryResult } from 'apollo-client';
 
 import { InventorySelectComponent } from '../inventory/inventory-select.component';
-import { Shipment } from '../shared/models';
+import { ShipmentSelectComponent } from './shipment-select.component';
 import { client } from '../apollo-client-init';
 
 import gql from 'graphql-tag';
@@ -13,15 +13,11 @@ import gql from 'graphql-tag';
   selector: 'shipment-create',
   template: `
     <h2>New Shipment</h2>
-
-    <div><input [(ngModel)]="shipment.name" placeholder="Name"></div>
-    <div><input [(ngModel)]="shipment.captain" placeholder="Captain"></div>
-
-    <inventory-select (add)="onAdd($event)" (remove)="onRemove($event)"></inventory-select>
-
+    <shipment-select (select)="onShipmentSelect($event)" (deselect)="onShipmentDeselect($event)"></shipment-select>
+    <inventory-select (select)="onProductSelect($event)" (deselect)="onProductDeselect($event)"></inventory-select>
     <button (click)="save()">Create</button>
   `,
-  directives: [InventorySelectComponent],
+  directives: [InventorySelectComponent, ShipmentSelectComponent],
 })
 @Apollo({
   client,
@@ -29,14 +25,12 @@ import gql from 'graphql-tag';
     return {
       add: () => ({
         mutation: gql`
-          mutation addShipment(
-            $name: String!
-            $captain: String!
+          mutation addProductsToShipment(
+            $id: String!
             $skus: [String]!
           ) {
-            addShipment(
-              name: $name
-              captain: $captain
+            addProductsToShipment(
+              id: $id
               skus: $skus
             ) {
               id
@@ -46,20 +40,24 @@ import gql from 'graphql-tag';
             }
           }
         `,
-        variables: component.shipment
+        variables: {
+          id: component.selectedShipment,
+          skus: Array.from(component.selectedProducts.values()),
+        },
       })
     };
   }
 })
 export class ShipmentCreateComponent {
-  shipment: Shipment = new Shipment();
+  selectedShipment: string;
+  selectedProducts: Set<string> = new Set<string>();
   add: () => Promise<ApolloQueryResult>;
 
   constructor(private router: Router ) {}
 
   save() {
     this.add()
-      .then(() => {
+      .then((result) => {
         this.router.navigateByUrl('/');
       })
       .catch((error) => {
@@ -67,11 +65,21 @@ export class ShipmentCreateComponent {
       });
   }
 
-  onAdd(product) {
-    this.shipment.addProduct(product);
+  onProductSelect({ sku }) {
+    if (!this.selectedProducts.has(sku)) {
+      this.selectedProducts.add(sku);
+    }
   }
 
-  onRemove(product) {
-    this.shipment.removeProduct(product);
+  onProductDeselect({ sku }) {
+    this.selectedProducts.delete(sku);
+  }
+
+  onShipmentSelect(shipment) {
+    this.selectedShipment = shipment.id;
+  }
+
+  onShipmentDeselect() {
+    this.selectedShipment = null;
   }
 }
