@@ -3,19 +3,33 @@
 const knex = require('./knex');
 
 class Products {
+  create(product) {
+    const sku = '' + Math.round(Math.random()*10000000);
+
+    return knex('products').insert({
+      sku,
+      name: product.name,
+      cost_to_manufacture: product.costToManufacture,
+      retail_price: product.retailPrice,
+      quantity: product.quantity,
+    }).then(() => {
+      return sku;
+    });
+  }
+
   all() {
     return knex('products');
   }
 
-  single(id) {
-    return knex('products').where('id', id);
+  single(sku) {
+    return knex('products').where('sku', sku).first();
   }
 
   of(shipmentId) {
     return knex
       .select('products.*')
       .from('shipment_products')
-      .leftJoin('products', function() {
+      .innerJoin('products', function() {
         this
           .on('products.sku', '=', 'shipment_products.product_sku')
           .andOn('shipment_products.shipment_id', '=', shipmentId);
