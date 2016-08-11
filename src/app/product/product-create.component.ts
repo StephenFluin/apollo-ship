@@ -5,9 +5,6 @@ import { ApolloQueryResult } from 'apollo-client';
 
 import { client } from '../apollo-client-init';
 import { Product } from '../shared/models';
-import { MdButton } from '@angular2-material/button';
-
-import { MdInput } from '@angular2-material/input';
 
 import gql from 'graphql-tag';
 
@@ -24,9 +21,6 @@ import gql from 'graphql-tag';
       <button md-raised-button color="primary" (click)="save()">Create</button>
     </div>
   `,
-  directives: [
-    MdButton, MdInput
-  ]
 })
 @Apollo({
   client,

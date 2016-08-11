@@ -3,8 +3,6 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Apollo } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
-import { ShipmentMapComponent } from './shipment-map.component';
-import { InventoryViewComponent } from '../inventory/inventory-view.component';
 import { ShipmentDetailsQuery } from './shipment-details.interface';
 import { shipmentInfoFragment } from '../shared/fragments';
 
@@ -25,7 +23,6 @@ import gql from 'graphql-tag';
     </div>
     <div *ngIf="!data.shipment && !data.loading">No shipment found with the provided id.</div>
     `,
-  directives: [ROUTER_DIRECTIVES, ShipmentMapComponent, InventoryViewComponent],
 })
 @Apollo({
   client,

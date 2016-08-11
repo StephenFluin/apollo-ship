@@ -3,11 +3,8 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Apollo } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
-import { ShipmentDetailsComponent } from './shipment-details.component';
 import { ShipmentsListQuery } from './shipments-list.interface';
 
-import { MdButton } from '@angular2-material/button';
-import { MdCard } from '@angular2-material/card';
 
 import gql from 'graphql-tag';
 
@@ -25,11 +22,6 @@ import gql from 'graphql-tag';
       </md-card>
     </div>
     `,
-  directives: [
-    ROUTER_DIRECTIVES,
-    ShipmentDetailsComponent,
-    MdButton, MdCard,
-  ],
 })
 @Apollo({
   client,

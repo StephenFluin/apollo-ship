@@ -2,7 +2,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { Apollo, ApolloQuery } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
-import { ProductShortComponent } from '../product/product-short.component';
 import { InventorySelectQuery } from './inventory-select.interface';
 
 import gql from 'graphql-tag';
@@ -25,7 +24,6 @@ import gql from 'graphql-tag';
         </tr>
       </table>
     `,
-    directives: [ProductShortComponent]
 })
 @Apollo({
   client,

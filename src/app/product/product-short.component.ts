@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Apollo } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
@@ -19,7 +18,6 @@ import gql from 'graphql-tag';
       <td>{{ data.product.quantity }}</td>
     </div>
     `,
-    directives: [ROUTER_DIRECTIVES]
 })
 @Apollo({
   client,

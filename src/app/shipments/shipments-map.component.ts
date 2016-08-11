@@ -3,7 +3,6 @@ import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
 import { Apollo } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
-import { ShipmentShortWithDataComponent } from './shipment-short-with-data.component';
 import { ShipmentsMapQuery } from './shipments-map.interface';
 
 import gql from 'graphql-tag';
@@ -25,7 +24,6 @@ import gql from 'graphql-tag';
     `,
   directives: [
     GOOGLE_MAPS_DIRECTIVES,
-    ShipmentShortWithDataComponent
   ],
 })
 @Apollo({

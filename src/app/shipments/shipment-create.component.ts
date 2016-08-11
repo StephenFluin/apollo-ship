@@ -3,11 +3,7 @@ import { Router } from '@angular/router';
 import { Apollo } from 'angular2-apollo';
 import { ApolloQueryResult } from 'apollo-client';
 
-import { InventorySelectComponent } from '../inventory/inventory-select.component';
-import { ShipmentSelectComponent } from './shipment-select.component';
 import { client } from '../apollo-client-init';
-
-import { MdButton } from '@angular2-material/button';
 
 import gql from 'graphql-tag';
 
@@ -21,9 +17,6 @@ import gql from 'graphql-tag';
       <button md-raised-button color="primary" (click)="save()">Create</button>
     </div>
   `,
-  directives: [InventorySelectComponent, ShipmentSelectComponent,
-    MdButton
-  ],
 })
 @Apollo({
   client,
