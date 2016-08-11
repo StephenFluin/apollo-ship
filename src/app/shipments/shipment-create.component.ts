@@ -7,17 +7,23 @@ import { InventorySelectComponent } from '../inventory/inventory-select.componen
 import { ShipmentSelectComponent } from './shipment-select.component';
 import { client } from '../apollo-client-init';
 
+import { MdButton } from '@angular2-material/button';
+
 import gql from 'graphql-tag';
 
 @Component({
   selector: 'shipment-create',
   template: `
     <h2>New Shipment</h2>
-    <shipment-select (select)="onShipmentSelect($event)" (deselect)="onShipmentDeselect($event)"></shipment-select>
-    <inventory-select (select)="onProductSelect($event)" (deselect)="onProductDeselect($event)"></inventory-select>
-    <button (click)="save()">Create</button>
+    <div class="content">
+      <shipment-select (select)="onShipmentSelect($event)" (deselect)="onShipmentDeselect($event)"></shipment-select>
+      <inventory-select (select)="onProductSelect($event)" (deselect)="onProductDeselect($event)"></inventory-select>
+      <button md-raised-button color="primary" (click)="save()">Create</button>
+    </div>
   `,
-  directives: [InventorySelectComponent, ShipmentSelectComponent],
+  directives: [InventorySelectComponent, ShipmentSelectComponent,
+    MdButton
+  ],
 })
 @Apollo({
   client,

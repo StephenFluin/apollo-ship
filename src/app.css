@@ -2,6 +2,10 @@
     margin:0px;
     padding:0px;
 }
-h1,h2,h3,h4,p {
+h1,h2,h3,h4,p,.content {
     padding:16px;
+}
+nav>* {
+    margin:16px;
+    display:inline-block;
 }

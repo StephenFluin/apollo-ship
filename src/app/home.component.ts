@@ -4,6 +4,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { ShipmentsMapComponent } from './shipments/shipments-map.component';
 import { ShipmentsListComponent } from './shipments/shipments-list.component';
 import { RevenueReportComponent } from './shipments/revenue-report.component';
+import { MdButton } from '@angular2-material/button';
 
 @Component({
   selector: 'home',
@@ -18,16 +19,20 @@ import { RevenueReportComponent } from './shipments/revenue-report.component';
     <revenue-report></revenue-report>
 
     <h2>New Shipment</h2>
-    <button [routerLink]="['/shipments/create']">Create Shipment</button>
-
+    <div class="content">
+      <button md-raised-button color="primary" [routerLink]="['/shipments/create']">Create Shipment</button>
+    </div>
     <h2>New Product</h2>
-    <button [routerLink]="['/products/create']">Create Product</button>
+    <div class="content">
+      <button md-raised-button color="primary" [routerLink]="['/products/create']">Create Product</button>
+    </div>
     `,
   directives: [
     ROUTER_DIRECTIVES,
     ShipmentsMapComponent,
     RevenueReportComponent,
-    ShipmentsListComponent
+    ShipmentsListComponent,
+    MdButton
   ],
 })
 export class HomeComponent {

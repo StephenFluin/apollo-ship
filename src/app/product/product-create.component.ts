@@ -5,6 +5,9 @@ import { ApolloQueryResult } from 'apollo-client';
 
 import { client } from '../apollo-client-init';
 import { Product } from '../shared/models';
+import { MdButton } from '@angular2-material/button';
+
+import { MdInput } from '@angular2-material/input';
 
 import gql from 'graphql-tag';
 
@@ -12,14 +15,18 @@ import gql from 'graphql-tag';
   selector: 'product-create',
   template: `
     <h2>New Product</h2>
+    <div class="content">
+      <div><input [(ngModel)]="product.name" placeholder="Name"></div>
+      <div><input [(ngModel)]="product.costToManufacture" placeholder="Cost to manufacture"></div>
+      <div><input [(ngModel)]="product.retailPrice" placeholder="Retail price"></div>
+      <div><input [(ngModel)]="product.quantity" type="number" placeholder="Quantity"></div>
 
-    <div><input [(ngModel)]="product.name" placeholder="Name"></div>
-    <div><input [(ngModel)]="product.costToManufacture" placeholder="Cost to manufacture"></div>
-    <div><input [(ngModel)]="product.retailPrice" placeholder="Retail price"></div>
-    <div><input [(ngModel)]="product.quantity" type="number" placeholder="Quantity"></div>
-
-    <button (click)="save()">Create</button>
-  `
+      <button md-raised-button color="primary" (click)="save()">Create</button>
+    </div>
+  `,
+  directives: [
+    MdButton, MdInput
+  ]
 })
 @Apollo({
   client,

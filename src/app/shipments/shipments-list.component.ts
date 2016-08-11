@@ -6,25 +6,29 @@ import { client } from '../apollo-client-init';
 import { ShipmentDetailsComponent } from './shipment-details.component';
 import { ShipmentsListQuery } from './shipments-list.interface';
 
+import { MdButton } from '@angular2-material/button';
+import { MdCard } from '@angular2-material/card';
+
 import gql from 'graphql-tag';
 
 @Component({
   selector: 'shipments-list',
   template: `
-    <div *ngIf="!data.loading">
-      <div *ngFor="let shipment of data.shipments">
+    <div *ngIf="!data.loading" style="display:flex;flex-wrap:wrap;">
+      <md-card *ngFor="let shipment of data.shipments" style="margin:16px;width:450px;">
         <shipment-details
           [shipmentId]="shipment.id"
           [map]="false"
           [editable]="false"
           [link]="true">
         </shipment-details>
-      </div>
+      </md-card>
     </div>
     `,
   directives: [
     ROUTER_DIRECTIVES,
-    ShipmentDetailsComponent
+    ShipmentDetailsComponent,
+    MdButton, MdCard,
   ],
 })
 @Apollo({

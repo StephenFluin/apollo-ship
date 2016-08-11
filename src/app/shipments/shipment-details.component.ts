@@ -17,10 +17,11 @@ import gql from 'graphql-tag';
         <h2 *ngIf="!link">{{ data.shipment.name }}</h2>
         <h2 *ngIf="link"><a [routerLink]="['/shipments', shipmentId]">{{ data.shipment.name }}</a></h2>
         <shipment-map *ngIf="map" [shipmentId]="shipmentId" [latitude]="lat" [longitude]="lng"></shipment-map>
-
-        <div>Projected Revenue: {{ data.shipment.revenue/100 | currency: 'USD' : 'true' }}</div>
-        <div>Captain: {{ data.shipment.captain }}</div>
-        <inventory-view [shipmentId]="shipmentId" [editable]="editable"></inventory-view>
+        <div class="content">
+          <div>Projected Revenue: {{ data.shipment.revenue/100 | currency: 'USD' : 'true' }}</div>
+          <div>Captain: {{ data.shipment.captain }}</div>
+          <inventory-view [shipmentId]="shipmentId" [editable]="editable"></inventory-view>
+        </div>
     </div>
     <div *ngIf="!data.shipment && !data.loading">No shipment found with the provided id.</div>
     `,
