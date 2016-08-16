@@ -16,6 +16,7 @@ const map: any = {
   'redux': 'vendor/redux/dist/redux.min.js',
   'symbol-observable': 'vendor/symbol-observable',
   'lodash': 'vendor/lodash',
+  'lodash.omit': 'vendor/lodash.omit',
   '@angular2-material': 'vendor/@angular2-material',
 };
 
@@ -56,7 +57,11 @@ const packages: any = {
   'lodash': {
     defaultExtension: 'js',
     main: 'index.js'
-  }
+  },
+  'lodash.omit': {
+    defaultExtension: 'js',
+    main: 'index.js'
+  },
 };
 
 const materialPkgs:string[] = [
