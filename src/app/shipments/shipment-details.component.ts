@@ -1,10 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Apollo } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
 import { ShipmentDetailsQuery } from './shipment-details.interface';
-import { shipmentInfoFragment } from '../shared/fragments';
 
 import gql from 'graphql-tag';
 
@@ -31,7 +29,6 @@ import gql from 'graphql-tag';
       query: gql`
         query getShipment($id: String!) {
           shipment(id: $id) {
-            #...shipmentInfo
             name
             revenue
             captain
@@ -40,8 +37,7 @@ import gql from 'graphql-tag';
       `,
       variables: {
         id: component.shipmentId
-      },
-      //fragments: shipmentInfoFragment
+      }
     }
   })
 })

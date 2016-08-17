@@ -3,7 +3,6 @@ import { Apollo } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
 import { ShipmentShortWithDataQuery } from './shipment-short-with-data.interface';
-import { shipmentInfoFragment } from '../shared/fragments';
 
 import gql from 'graphql-tag';
 
@@ -21,7 +20,6 @@ import gql from 'graphql-tag';
         query getShipment($id: String!) {
           shipment(id: $id) {
             id
-            #...shipmentInfo
             name
             revenue
             captain
@@ -30,8 +28,7 @@ import gql from 'graphql-tag';
       `,
       variables: {
         id: component.shipmentId
-      },
-      //fragments: shipmentInfoFragment
+      }
     }
   })
 })

@@ -1,9 +1,8 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA }       from '@angular/core';
-import { BrowserModule  } from '@angular/platform-browser';
-import { AppComponent }   from './app.component';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { routes } from './routes';
 import { GOOGLE_MAPS_PROVIDERS } from 'angular2-google-maps/core';
 
 import { MdButtonModule } from '@angular2-material/button';
@@ -11,6 +10,7 @@ import { MdCardModule } from '@angular2-material/card';
 import { MdInputModule } from '@angular2-material/input';
 import { MdToolbarModule } from '@angular2-material/toolbar';
 
+import { routes } from './routes';
 import { HomeComponent } from './home.component';
 import { ShipmentViewComponent } from './shipments/shipment-view.component';
 import { ShipmentCreateComponent } from './shipments/shipment-create.component';
@@ -31,39 +31,40 @@ import { ProductDetailsComponent } from './product/product-details.component';
 import { ProductShortComponent } from './product/product-short.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        ShipmentCreateComponent,
-        ShipmentViewComponent,
-        InventoryViewComponent,
-        ProductCreateComponent,
-        ProductViewComponent,
-        InventorySelectComponent, 
-        ShipmentSelectComponent,
-        ShipmentMapComponent, 
-        ShipmentsMapComponent,
-        InventoryViewComponent,
-        ShipmentDetailsComponent,
-        RevenueReportComponent,
-        ShipmentsListComponent,    
-        ShipmentShortWithDataComponent,
-        ShipmentShortComponent,
-        ProductDetailsComponent,
-        ProductShortComponent
-    ],
-    imports:      [
-        BrowserModule,
-        RouterModule.forRoot(routes),
-        FormsModule,
-        MdButtonModule,
-        MdCardModule,
-        MdInputModule,
-        MdToolbarModule,
-    ],
-    bootstrap:    [AppComponent],
-    providers: [
-        GOOGLE_MAPS_PROVIDERS,],
-    //schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ShipmentCreateComponent,
+    ShipmentViewComponent,
+    InventoryViewComponent,
+    ProductCreateComponent,
+    ProductViewComponent,
+    InventorySelectComponent,
+    ShipmentSelectComponent,
+    ShipmentMapComponent,
+    ShipmentsMapComponent,
+    InventoryViewComponent,
+    ShipmentDetailsComponent,
+    RevenueReportComponent,
+    ShipmentsListComponent,
+    ShipmentShortWithDataComponent,
+    ShipmentShortComponent,
+    ProductDetailsComponent,
+    ProductShortComponent
+  ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
+    MdButtonModule,
+    MdCardModule,
+    MdInputModule,
+    MdToolbarModule,
+  ],
+  bootstrap: [ AppComponent ],
+  providers: [
+    GOOGLE_MAPS_PROVIDERS
+  ],
+  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
