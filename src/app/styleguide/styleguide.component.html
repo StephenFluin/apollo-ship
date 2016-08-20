@@ -1,0 +1,96 @@
+<md-toolbar color="primary">
+  {{title}}
+</md-toolbar>
+
+<md-content>
+	<h1 class="md-headline">ApolloShip Styleguide</h1>
+	<h2 class="md-title">This styleguide is a collection of the components and patterns that make up ApolloShip.</h2>
+
+	<p>With the possibility of many developers handling and editing the code, we wanted to create a living document to house the design patterns used. This can ensure not only a consistent UI but also consistent, readable code for anyone working on the app.</p>
+	<section>
+		<h2 class="md-title">Colors</h2>
+		<h3 class="md-subheading">Main Color</h3>
+		<md-layout>
+			<div md-layout-row>
+				<md-card>
+					<div class="card-color" md-card-image></div>
+					<md-card-content>
+						<p>#1a1a1a</p>
+					</md-card-content>
+				</md-card>
+			</div>
+		</md-layout>
+
+		<div class="module secondary-colors">
+			<h3 class="md-subheading">Secondary Colors</h3>
+			<md-layout>
+				<div md-layout-row>
+					<md-card>
+						<div class="card-color color-red" md-card-image></div>
+						<md-card-content>
+							<p>#cc4141</p>
+						</md-card-content>
+					</md-card>
+
+					<md-card>
+						<div class="card-color color-orange" md-card-image></div>
+						<md-card-content>
+							<p>#f7941d</p>
+						</md-card-content>
+					</md-card>
+
+					<md-card>
+						<div class="card-color color-green" md-card-image></div>
+						<md-card-content>
+							<p>#8dc63f</p>
+						</md-card-content>
+					</md-card>
+
+					<md-card>
+						<div class="card-color color-blue" md-card-image></div>
+						<md-card-content>
+							<p>#0097da</p>
+						</md-card-content>
+					</md-card>
+				</div>
+			</md-layout>
+		</div>
+	</section>
+
+	<section>
+		<div class="module">
+			<h2 class="md-title article-title">Buttons</h2>
+
+			<button md-button color="primary">Primary</button>
+			<button md-button color="secondary">Secondary</button>
+			<button md-button disabled>Disabled</button>
+		</div>
+	</section>
+
+	<section>
+		<div class="module">
+			<h2 class="md-title article-title">Lists</h2>
+
+			<md-list>
+				<md-list-item>
+					<h3 class="md-headline" md-line>Flight AMF1150</h3>
+					<p md-line><strong>Captain:</strong> B190</p>
+				</md-list-item>
+
+				<md-divider></md-divider>
+
+				<md-list-item>
+					<h3 class="md-headline" md-line>Flight AMF1150</h3>
+					<p md-line><strong>Captain:</strong> B190</p>
+				</md-list-item>
+
+				<md-divider></md-divider>
+
+				<md-list-item>
+					<h3 class="md-headline" md-line>Flight AMF1150</h3>
+					<p md-line><strong>Captain:</strong> B190</p>
+				</md-list-item>
+			</md-list>
+		</div>
+	</section>
+</md-content>
