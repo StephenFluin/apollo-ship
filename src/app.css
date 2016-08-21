@@ -1,11 +1,17 @@
 * {
-    margin:0px;
-    padding:0px;
+    margin: 0px;
+    padding: 0px;
 }
-h1,h2,h3,h4,p,.content {
-    padding:16px;
+
+body {
+	font-family: 'Plan Grotesque Regular', sans-serif;
+	line-height: 1.7;
+	font-size: 16px;
+	color: #656565;
+	background: #fafafa;
 }
-nav>* {
-    margin:16px;
-    display:inline-block;
+
+[md-fab] span {
+	display: flex;
+	justify-content: center;
 }
