@@ -4,26 +4,34 @@ import { Apollo, ApolloQuery } from 'angular2-apollo';
 import { client } from '../apollo-client-init';
 import { InventorySelectQuery } from './inventory-select.interface';
 
+import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
+import { MdRadioModule } from '@angular2-material/radio';
+
 import gql from 'graphql-tag';
 
 @Component({
+	moduleId: module.id,
     selector: 'inventory-select',
     template: `
-      <table *ngIf="!data.loading">
-        <tr>
-          <th>Name</th>
-          <th>SKU</th>
-          <th>Cost to Manufacture</th>
-          <th>Retail Price</th>
-          <th>Quantity</th>
-          <th></th>
-        </tr>
-        <tr *ngFor="let product of data.products">
-          <input type="checkbox" [checked]="product.selected" (change)="_toggle(product)" style="float: left;" />
-          <product-short [sku]="product.sku"></product-short>
-        </tr>
-      </table>
+      <div *ngIf="!data.loading">
+        <md-expansion-panel>
+			<md-panel-select>
+		  		<span md-panel-title>With products</span>
+				<md-icon svgIcon="arrow"></md-icon>
+			</md-panel-select>
+			<md-panel-options>
+				<md-radio-group [(value)]="groupValue">
+					<md-radio-button *ngFor="let product of data.products" [value]="product.sku">
+						{{product.name}}
+					</md-radio-button>
+	          	</md-radio-group>
+			</md-panel-options>
+		</md-expansion-panel>
+      </div>
     `,
+	styleUrls: ['../home.component.css'],
+	directives: [MdIcon],
+	providers: [MdIconRegistry]
 })
 @Apollo({
   client,
@@ -33,6 +41,7 @@ import gql from 'graphql-tag';
         query getInventory {
           products {
             sku
+			name
           }
         }
       `
@@ -44,6 +53,10 @@ export class InventorySelectComponent {
   @Output() deselect: EventEmitter<any> = new EventEmitter();
 
   data: InventorySelectQuery;
+
+  constructor(mdIconRegistry: MdIconRegistry) {
+	  mdIconRegistry.addSvgIconSet('app/assets/icon-set.svg');
+  }
 
   _select(product): void {
     product.selected = true;

@@ -55,12 +55,16 @@ class Shipments {
 
     return {
       id: flight.ident,
-      name: 'Flight ' + flight.ident,
+      name: "Flight " + flight.ident,
       revenue: mock.getRevenue(),
       captain: flight.aircrafttype,
       origin: flight.origin,
       destination: flight.destination,
-      currentLocation: flight.ident
+	  originName: flight.originCity,
+	  destinationName: flight.destinationCity,
+      currentLocation: flight.ident,
+	  originCode: flight.origin,
+	  destinationCode: flight.destination
     };
   }
 }

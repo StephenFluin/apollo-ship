@@ -9,18 +9,10 @@ import { Product } from '../shared/models';
 import gql from 'graphql-tag';
 
 @Component({
+	moduleId: module.id,
   selector: 'product-create',
-  template: `
-    <h2>New Product</h2>
-    <div class="content">
-      <div><input [(ngModel)]="product.name" placeholder="Name"></div>
-      <div><input [(ngModel)]="product.costToManufacture" placeholder="Cost to manufacture"></div>
-      <div><input [(ngModel)]="product.retailPrice" placeholder="Retail price"></div>
-      <div><input [(ngModel)]="product.quantity" type="number" placeholder="Quantity"></div>
-
-      <button md-raised-button color="primary" (click)="save()">Create</button>
-    </div>
-  `,
+  templateUrl: 'product-create.component.html',
+  styleUrls: ['../home.component.css']
 })
 @Apollo({
   client,
@@ -52,6 +44,9 @@ import gql from 'graphql-tag';
 export class ProductCreateComponent {
   product: Product = new Product();
   add: () => Promise<ApolloQueryResult>;
+
+  lat: number = 37.418901;
+  lng: number =  -122.079767;
 
   constructor(private router: Router) {}
 

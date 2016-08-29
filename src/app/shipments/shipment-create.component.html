@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="inner-container">
+	  <main-header></main-header>
+	  <md-content>
+			<div class="shipment-large new-shipment">
+		 		<fab></fab>
+				<div class="shipment-heading">
+		  			<h2 class="md-headline">New Shipment</h2>
+				</div>
+
+				<div class="product-form">
+					<shipment-select (select)="onShipmentSelect($event)" (deselect)="onShipmentDeselect($event)"></shipment-select>
+					<inventory-select (select)="onProductSelect($event)" (deselect)="onProductDeselect($event)"></inventory-select>
+
+					<button md-button color="primary" (click)="save()">Create</button>
+				</div>
+			</div>
+
+
+	  </md-content>
+  </div>
+  <shipments-map [latitude]="lat" [longitude]="lng"></shipments-map>
+</div>
