@@ -6,7 +6,7 @@ class FlightAware {
   flights() {
     return this._request('Enroute', {
       airport: 'KSFO',
-      howMany: 20,
+      howMany: 5,
       filter: 'airline',
       offset: 0
     })
@@ -70,6 +70,6 @@ class FlightAware {
 FlightAware.url = 'http://flightxml.flightaware.com/json/FlightXML2/';
 FlightAware.username = 'kamilkisiela';
 FlightAware.apiKey = '--api-key--';
-FlightAware.apiKey = '73ac258f4e1d7dd56293462cdac123edf949f6fc';
+FlightAware.apiKey = 'bb7a17dbd26b86ccaf197a2b66add26b08909f7d';
 
 module.exports = FlightAware;
