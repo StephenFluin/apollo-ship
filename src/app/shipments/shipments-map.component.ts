@@ -10,7 +10,7 @@ import gql from 'graphql-tag';
 @Component({
   selector: 'shipments-map',
   template: `
-    <sebm-google-map [latitude]="latitude" [longitude]="longitude" [zoom]="9" [styles]="_styler" [disableDefaultUI]="true" style="height:70vh">
+    <sebm-google-map [latitude]="latitude" [longitude]="longitude" [zoom]="9" [styles]="_styler" [disableDefaultUI]="true" style="height:40vh">
 
       <sebm-google-map-marker *ngFor="let shipment of data.shipments"
         [latitude]="shipment.currentLocation.latitude"

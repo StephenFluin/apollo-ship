@@ -193,11 +193,10 @@ p {
 md-list .md-title {
   margin: 0; }
 md-list md-list-item {
-  min-height: 72px;
+  min-height: 90px;
   display: flex;
   align-items: center;
   padding: 30px 60px 30px 30px;
-  margin: 0 -60px 0 -30px;
   border-bottom: 1px solid #e5e5e5; }
   md-list md-list-item .md-list-item {
     height: auto; }
@@ -261,7 +260,16 @@ md-fab-speed-dial {
   outline: none;
   position: relative;
   z-index: 5000;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  [md-fab-button] md-icon {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  [md-fab-button]:hover {
+    background: linear-gradient(45deg, #882BBD, #D73AED); }
+  [md-fab-button]:active {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); }
+  [md-fab-button].open md-icon {
+    transform: rotate(45deg); }
 
 [md-fab-action] {
   width: 56px;
@@ -276,7 +284,10 @@ md-fab-speed-dial {
   cursor: pointer;
   outline: none;
   margin: 8px 0;
-  z-index: 1000; }
+  z-index: 1000;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  [md-fab-action]:hover {
+    background: #555; }
   [md-fab-action] svg {
     color: #fff;
     fill: #fff; }
@@ -286,61 +297,75 @@ md-fab-actions {
   position: relative;
   height: 56px;
   width: 56px;
-  transition: all 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.36s cubic-bezier(0.4, 0, 0.2, 1);
   transition-delay: .14s; }
   md-fab-actions [md-fab-action]:nth-of-type(1) {
     transform: translateY(calc(-100% - 8px));
-    transition: all 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.36s cubic-bezier(0.4, 0, 0.2, 1);
     transition-delay: .14s;
     position: relative;
     z-index: 1000; }
   md-fab-actions [md-fab-action]:nth-of-type(2) {
     transform: translateY(calc(-200% - 16px));
-    transition: all 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.36s cubic-bezier(0.4, 0, 0.2, 1);
     transition-delay: 0;
     position: relative;
     z-index: 900; }
   md-fab-actions.visible {
     transform: translateY(calc(100% + 16px));
-    transition: all 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.36s cubic-bezier(0.4, 0, 0.2, 1);
     transition-delay: 0; }
     md-fab-actions.visible [md-fab-action]:nth-of-type(2) {
       transform: translateY(-100%);
-      transition: all 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.36s cubic-bezier(0.4, 0, 0.2, 1);
       transition-delay: .14s; }
 
-.shipment-large {
+.page-header {
+  background: linear-gradient(45deg, #50D3E4, #72DDB5);
   padding: 30px 60px 30px 30px;
-  border-bottom: 1px solid #e5e5e5; }
-  .shipment-large .shipment-heading {
-    background: linear-gradient(45deg, #50D3E4, #72DDB5);
-    margin: -30px -60px 0 -30px;
-    padding: 30px 60px 30px 30px;
-    color: #fff;
-    height: 116px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column; }
-    .shipment-large .shipment-heading p {
-      margin: 0; }
-  .shipment-large h2 {
+  color: #fff;
+  height: 116px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column; }
+  .page-header p {
+    margin: 0; }
+  .page-header h2 {
     margin-bottom: 0;
     color: #fff; }
+
+main-header {
+  order: 1; }
+
+.page-header {
+  order: 2; }
+
+shipment-map, shipments-map {
+  order: 3; }
+
+md-content {
+  order: 4; }
+
+.shipment-large {
+  padding: 30px 60px 30px 30px; }
   .shipment-large .flight {
     display: flex;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 0;
     align-items: flex-end; }
     .shipment-large .flight .plane {
       transform: scale(1.5);
       transform-origin: center;
-      position: relative;
-      top: -18px;
+      align-self: center;
       color: #ccc; }
   .shipment-large .flight-info span {
     display: block; }
   .shipment-large .airport-code {
     font-size: 34px; }
+  .shipment-large .airport-name {
+    text-transform: capitalize;
+    letter-spacing: normal;
+    color: #1a1a1a; }
   .shipment-large .shipment-revenue {
     margin-top: 40px;
     letter-spacing: .05em;
@@ -359,20 +384,22 @@ md-list a {
   md-list a:hover {
     background: #efefef; }
 
-.product-form {
-  margin-top: 30px; }
-  .product-form .input-group {
-    display: flex; }
-    .product-form .input-group .input {
-      width: 50%; }
-      .product-form .input-group .input:first-of-type {
-        margin-right: 10px; }
-      .product-form .input-group .input:last-of-type {
-        margin-left: 10px; }
-  .product-form .label {
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #777; }
+.product-view .shipment-revenue {
+  margin-top: 0;
+  margin-bottom: 30px; }
+
+.product-form .input-group {
+  display: flex; }
+  .product-form .input-group .input {
+    width: 50%; }
+    .product-form .input-group .input:first-of-type {
+      margin-right: 10px; }
+    .product-form .input-group .input:last-of-type {
+      margin-left: 10px; }
+.product-form .label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #777; }
 
 @keyframes show {
   from {
@@ -387,20 +414,32 @@ md-expansion-panel {
   background: #fff;
   border-bottom: 1px solid #e5e5e5;
   padding: 15px 60px 0 30px;
-  display: block; }
+  display: block;
+  overflow-y: hidden; }
   md-expansion-panel [md-panel-title] {
     font-weight: 900; }
   md-expansion-panel md-icon {
-    color: #777; }
+    color: #777;
+    cursor: pointer;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1); }
+    md-expansion-panel md-icon.open {
+      transform: rotate(180deg);
+      transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1); }
   md-expansion-panel md-panel-select {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #777;
-    padding-bottom: 15px; }
-  md-expansion-panel md-panel-options {
     padding-bottom: 15px;
+    cursor: pointer; }
+  md-expansion-panel md-panel-options {
+    max-height: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: block; }
+    md-expansion-panel md-panel-options.open {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding-bottom: 15px;
+      max-height: 300px; }
   md-expansion-panel md-radio-button {
     display: block;
     padding: 10px 0;
@@ -413,46 +452,72 @@ md-expansion-panel {
     padding: 7px 60px 7px 30px; }
 
 .new-shipment {
-  padding: 0; }
+  padding: 0;
+  padding-bottom: 30px; }
   .new-shipment .shipment-heading {
     margin: 0; }
-  .new-shipment .product-form {
-    margin: 0; }
+  .new-shipment [md-button] {
+    margin-top: 30px; }
+
+.product-form {
+  margin: 0;
+  display: flex;
+  flex-direction: column; }
+  .product-form [md-button] {
+    align-self: center; }
+
+shipments-list {
+  display: block;
+  position: relative;
+  z-index: 100;
+  margin: -30px -60px 0 -30px;
+  box-sizing: content-box; }
 
 @media screen and (min-width: 720px) {
-  .container {
-    flex-direction: row; }
-
-  .inner-container {
+  .container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 50%;
+    max-width: 400px;
+    height: 100vh;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 500; }
+    z-index: 100; }
 
-  .logo, shipments-list {
-    width: 100%;
-    order: 1; }
+  main-header, .page-header, md-content {
+    width: 50%;
+    max-width: 400px;
+    z-index: 200; }
+
+  .logo {
+    width: 100%; }
+
+  .logo-icon {
+    position: relative;
+    z-index: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .logo-icon:hover span {
+      color: #dedede; }
+    .logo-icon:hover .icon-logo {
+      color: #dedede; }
 
   md-fab-speed-dial {
     right: -28px;
     left: auto;
-    top: 88px;
     margin: 0; }
 
-  shipments-list {
-    display: block;
-    overflow-y: auto;
-    position: relative;
-    z-index: 100;
-    height: calc(100vh - 55px);
-    padding: 0 60px 0 30px;
-    margin: 0 -60px 0 -30px;
-    box-sizing: content-box; }
+  .shipment-large {
+    height: calc(100vh - (55px + 116px));
+    overflow-y: auto; }
 
   shipments-map, shipment-map {
-    width: 50%;
+    min-width: 50%;
+    width: calc(100% - 400px);
     order: 2;
-    position: relative;
+    position: absolute;
+    right: 0;
+    top: 0;
     z-index: 50; } }
 
 /*# sourceMappingURL=home.component.css.map */

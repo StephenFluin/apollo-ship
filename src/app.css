@@ -9,7 +9,6 @@ body {
 	font-size: 16px;
 	color: #656565;
 	background: #fafafa;
-	overflow: hidden;
 }
 
 [md-fab] span {
@@ -70,7 +69,9 @@ md-input label {
 }
 
 @media screen and (min-width: 720px) {
-
+	body {
+		overflow: hidden;
+	}
 
 	sebm-google-map {
 		height: 100vh !important;
@@ -89,4 +90,13 @@ md-input label {
 
 .md-radio-label {
 	display: flex !important;
+}
+
+md-list {
+	padding-top: 0 !important;
+}
+
+.loading-header {
+	height: 55px;
+	background: #1a1a1a;
 }

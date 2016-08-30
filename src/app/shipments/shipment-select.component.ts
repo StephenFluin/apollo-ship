@@ -16,11 +16,11 @@ import gql from 'graphql-tag';
       <div *ngIf="data.loading">...</div>
       <div *ngIf="!data.loading">
 		<md-expansion-panel>
-			<md-panel-select>
+			<md-panel-select (click)="isOpen = !isOpen">
 		  		<span md-panel-title>Depart from</span>
-				<md-icon svgIcon="arrow"></md-icon>
+				<md-icon svgIcon="arrow" [class.open]="isOpen"></md-icon>
 			</md-panel-select>
-			<md-panel-options>
+			<md-panel-options [class.open]="isOpen">
 				<md-radio-group [(value)]="groupValue">
 					<md-radio-button *ngFor="let shipment of data.shipments" [value]="shipment.name">
 						{{ shipment.originName }}
@@ -58,6 +58,8 @@ export class ShipmentSelectComponent {
 
   data: ShipmentSelectQuery;
   selected: Shipment;
+
+  isOpen: boolean;
 
   constructor(mdIconRegistry: MdIconRegistry) {
 	  mdIconRegistry.addSvgIconSet('app/assets/icon-set.svg');

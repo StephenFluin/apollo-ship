@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, Renderer, ElementRef } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
@@ -10,11 +10,11 @@ import { HTTP_PROVIDERS } from '@angular/http';
   template: `
 	<md-fab-speed-dial>
 		<md-fab-trigger>
-			<button md-fab-button>
+			<button md-fab-button (click)="isVisible = !isVisible" [class.open]="isVisible">
 				<md-icon svgIcon="add"></md-icon>
 			</button>
 		</md-fab-trigger>
-		<md-fab-actions>
+		<md-fab-actions [class.visible]="isVisible">
 			<button md-fab-action [routerLink]="['/shipments/create']">
 				<md-icon svgIcon="fab-plane"></md-icon>
 			</button>
@@ -32,10 +32,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 export class FABComponent {
 	constructor(mdIconRegistry: MdIconRegistry) {
 		mdIconRegistry.addSvgIconSet('app/assets/icon-set.svg');
-
-		System.import('app/assets/js/site.js');
 	}
 
-
-
+	isVisible: boolean;
 }

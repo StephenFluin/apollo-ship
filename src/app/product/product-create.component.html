@@ -1,13 +1,11 @@
 <div class="container">
-  <div class="inner-container">
 	  <main-header></main-header>
+	  <div class="page-header">
+		  <h2 class="md-headline">New Product</h2>
+	  </div>
 	  <md-content>
+		  <fab></fab>
 			<div class="shipment-large">
-		 		<fab></fab>
-				<div class="shipment-heading">
-		  			<h2 class="md-headline">New Product</h2>
-				</div>
-
 				<div class="product-form">
 					<div class="input">
 						<span class="label">Name</span>
@@ -39,6 +37,5 @@
 
 
 	  </md-content>
-  </div>
   <shipments-map [latitude]="lat" [longitude]="lng"></shipments-map>
 </div>
