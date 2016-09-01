@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Neutral Regular', sans-serif; }
+  font-family: 'Neutral', sans-serif; }
 
 md-content {
   display: block;
@@ -54,7 +54,7 @@ md-layout {
   font-size: 16px;
   line-height: 24px;
   margin-bottom: 30px;
-  font-weight: 500; }
+  font-weight: 400; }
 
 p {
   font-size: 14px;
@@ -64,7 +64,7 @@ p {
 .logo {
   width: 100%;
   z-index: 10000;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 16px;
   text-decoration: none;
   display: flex;
@@ -346,34 +346,34 @@ shipment-map, shipments-map {
 md-content {
   order: 4; }
 
-.shipment-large {
+.content {
   padding: 30px 60px 30px 30px; }
-  .shipment-large .flight {
+  .content .flight {
     display: flex;
     justify-content: space-between;
     margin-top: 0;
     align-items: flex-end; }
-    .shipment-large .flight .plane {
+    .content .flight .plane {
       transform: scale(1.5);
       transform-origin: center;
       align-self: center;
       color: #ccc; }
-  .shipment-large .flight-info span {
+  .content .flight-info span {
     display: block; }
-  .shipment-large .airport-code {
+  .content .airport-code {
     font-size: 34px; }
-  .shipment-large .airport-name {
+  .content .airport-name {
     text-transform: capitalize;
     letter-spacing: normal;
     color: #1a1a1a; }
-  .shipment-large .shipment-revenue {
+  .content .shipment-revenue {
     margin-top: 40px;
     letter-spacing: .05em;
     font-size: 12px;
     text-transform: uppercase; }
-    .shipment-large .shipment-revenue span {
+    .content .shipment-revenue span {
       display: block; }
-    .shipment-large .shipment-revenue .revenue-number {
+    .content .shipment-revenue .revenue-number {
       font-size: 34px;
       color: #91C73F; }
 
@@ -417,7 +417,7 @@ md-expansion-panel {
   display: block;
   overflow-y: hidden; }
   md-expansion-panel [md-panel-title] {
-    font-weight: 900; }
+    font-weight: 400; }
   md-expansion-panel md-icon {
     color: #777;
     cursor: pointer;
@@ -447,6 +447,8 @@ md-expansion-panel {
     cursor: pointer; }
     md-expansion-panel md-radio-button:hover {
       background: #e5e5e5; }
+    md-expansion-panel md-radio-button.md-radio-checked {
+      background: #e5e5e5; }
   md-expansion-panel md-radio-button {
     margin: 0 -60px 0 -30px;
     padding: 7px 60px 7px 30px; }
@@ -465,6 +467,46 @@ md-expansion-panel {
   flex-direction: column; }
   .product-form [md-button] {
     align-self: center; }
+
+inventory-view {
+  border-top: 1px solid #e5e5e5;
+  margin: 30px -60px 0 -30px;
+  padding: 30px 60px 0 30px;
+  display: block; }
+
+.subtitle {
+  letter-spacing: .05em;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  display: block; }
+
+.inventory-list {
+  margin: 0 -60px 0 -30px; }
+  .inventory-list md-list-item {
+    min-height: 48px;
+    border-bottom: 0;
+    padding: 0 60px 0 30px;
+    cursor: pointer;
+    color: #777;
+    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1); }
+    .inventory-list md-list-item button {
+      opacity: 0;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1); }
+      .inventory-list md-list-item button md-icon {
+        color: #CC4141; }
+    .inventory-list md-list-item:hover {
+      background: #e5e5e5; }
+      .inventory-list md-list-item:hover .md-list-item {
+        color: #1a1a1a; }
+      .inventory-list md-list-item:hover button {
+        opacity: 1; }
+  .inventory-list .md-list-item {
+    width: 100%;
+    justify-content: space-between;
+    color: #555; }
+  .inventory-list button:hover::after {
+    display: none; }
 
 shipments-list {
   display: block;
@@ -495,8 +537,9 @@ shipments-list {
 
   .logo-icon {
     position: relative;
-    z-index: 500;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    z-index: 500; }
+    .logo-icon span, .logo-icon .icon-logo {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
     .logo-icon:hover span {
       color: #dedede; }
     .logo-icon:hover .icon-logo {
@@ -507,7 +550,7 @@ shipments-list {
     left: auto;
     margin: 0; }
 
-  .shipment-large {
+  .content {
     height: calc(100vh - (55px + 116px));
     overflow-y: auto; }
 

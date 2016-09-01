@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { Apollo } from 'angular2-apollo';
 
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
@@ -10,7 +10,6 @@ import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
 
 import { client } from '../apollo-client-init';
 import { ShipmentDetailsQuery } from './shipment-details.interface';
-import { shipmentInfoFragment } from '../shared/fragments';
 
 import gql from 'graphql-tag';
 
@@ -29,7 +28,6 @@ import gql from 'graphql-tag';
       query: gql`
         query getShipment($id: String!) {
           shipment(id: $id) {
-            #...shipmentInfo
             name
             revenue
             captain
@@ -42,8 +40,7 @@ import gql from 'graphql-tag';
       `,
       variables: {
         id: component.shipmentId
-      },
-      //fragments: shipmentInfoFragment
+      }
     }
   })
 })

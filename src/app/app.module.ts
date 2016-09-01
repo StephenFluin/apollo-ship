@@ -1,9 +1,10 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA }       from '@angular/core';
-import { BrowserModule  } from '@angular/platform-browser';
-import { AppComponent }   from './app.component';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { routes } from './routes';
+
+
 import { GOOGLE_MAPS_PROVIDERS, provideLazyMapsAPILoaderConfig } from 'angular2-google-maps/core';
 import { HttpModule } from '@angular/http';
 
@@ -13,6 +14,7 @@ import { MdInputModule } from '@angular2-material/input';
 import { MdToolbarModule } from '@angular2-material/toolbar';
 import { MdRadioModule } from '@angular2-material/radio';
 
+import { routes } from './routes';
 import { HomeComponent } from './home.component';
 import { ShipmentViewComponent } from './shipments/shipment-view.component';
 import { ShipmentCreateComponent } from './shipments/shipment-create.component';

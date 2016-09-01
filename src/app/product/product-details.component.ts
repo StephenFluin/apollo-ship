@@ -3,7 +3,6 @@ import { Apollo } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
 import { ProductDetailsQuery } from './product-details.interface';
-// import { productInfoFragment } from '../shared/fragments';
 
 import gql from 'graphql-tag';
 
@@ -20,7 +19,6 @@ import gql from 'graphql-tag';
       query: gql`
         query getProduct($sku: String!) {
           product (sku: $sku) {
-            #...productInfo
             name
             costToManufacture
             retailPrice
@@ -29,8 +27,7 @@ import gql from 'graphql-tag';
       `,
       variables: {
         sku: component.sku
-      },
-      //fragments: productInfoFragment
+      }
     }
   })
 })

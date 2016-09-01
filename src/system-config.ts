@@ -99,6 +99,7 @@ materialPkgs.forEach((pkg) => {
   'keys',
   'keysin',
   'mapvalues',
+  'omit',
   'pick',
   'rest',
   '_baseclone',

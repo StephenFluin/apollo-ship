@@ -1,6 +1,6 @@
 * {
 	box-sizing: border-box;
-	font-family: 'Neutral Regular', sans-serif;
+	font-family: 'Neutral', sans-serif;
 }
 
 md-content {
@@ -64,7 +64,7 @@ md-layout {
 	font-size: 16px;
 	line-height: 24px;
 	margin-bottom: 30px;
-	font-weight: 500;
+	font-weight: 400;
 }
 
 p {
@@ -76,7 +76,7 @@ p {
 .logo {
 	width: 100%;
 	z-index: 10000;
-	font-weight: 700;
+	font-weight: 400;
 	font-size: 16px;
 	text-decoration: none;
 	display: flex;
@@ -476,7 +476,7 @@ md-content {
 	order: 4;
 }
 
-.shipment-large {
+.content {
 	padding: 30px 60px 30px 30px;
 
 
@@ -593,7 +593,7 @@ md-expansion-panel {
 	overflow-y: hidden;
 
 	[md-panel-title] {
-		font-weight: 900;
+		font-weight: 400;
 	}
 
 	md-icon {
@@ -637,6 +637,10 @@ md-expansion-panel {
 		&:hover {
 			background: #e5e5e5;
 		}
+
+		&.md-radio-checked {
+			background: #e5e5e5;
+		}
 	}
 
 	md-radio-button {
@@ -667,6 +671,66 @@ md-expansion-panel {
 	[md-button] {
 		align-self: center;
 	}
+}
+
+inventory-view {
+	border-top: 1px solid #e5e5e5;
+	margin: 30px -60px 0 -30px;
+	padding: 30px 60px 0 30px;
+	display: block;
+}
+
+.subtitle {
+	letter-spacing: .05em;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin-bottom: 15px;
+	display: block;
+}
+
+.inventory-list {
+	margin: 0 -60px 0 -30px;
+
+	md-list-item {
+		min-height: 48px;
+		border-bottom: 0;
+		padding: 0 60px 0 30px;
+		cursor: pointer;
+		color: #777;
+		transition: all .18s cubic-bezier(.4,0,.2,1);
+
+		button {
+			opacity: 0;
+			transition: all .18s cubic-bezier(.4,0,.2,1);
+
+			md-icon {
+				color: #CC4141;
+			}
+		}
+
+		&:hover {
+			background: #e5e5e5;
+
+			.md-list-item {
+				color: #1a1a1a;
+			}
+
+			button {
+				opacity: 1;
+			}
+		}
+	}
+
+	.md-list-item {
+		width: 100%;
+		justify-content: space-between;
+		color: #555;
+	}
+
+	button:hover::after {
+		display: none;
+	}
+
 }
 
 shipments-list {
@@ -706,7 +770,10 @@ shipments-list {
 	.logo-icon {
 		position: relative;
 		z-index: 500;
-		transition: all .2s cubic-bezier(.4,0,.2,1);
+
+		span, .icon-logo {
+			transition: all .2s cubic-bezier(.4,0,.2,1);
+		}
 
 		&:hover {
 
@@ -727,7 +794,7 @@ shipments-list {
 		margin: 0;
 	}
 
-	.shipment-large {
+	.content {
 		height: calc(100vh - (55px + 116px));
 		overflow-y: auto;
 	}

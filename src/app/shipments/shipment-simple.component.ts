@@ -16,7 +16,7 @@ import gql from 'graphql-tag';
   template: `
   	<div *ngIf="data.shipment && !data.loading">
     	<h3 class="md-title" md-line>{{ data.shipment.name }}</h3>
-		<p md-line><strong>Captain:</strong> {{ data.shipment.captain }}</p>
+		<p md-line>Captain: {{ data.shipment.captain }}</p>
 
 		<div class="flight" md-line>
   	  		<span>{{ data.shipment.originName }}</span>
