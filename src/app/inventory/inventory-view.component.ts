@@ -5,38 +5,38 @@ import { client } from '../apollo-client-init';
 import { ProductShortComponent } from '../product/product-short.component';
 import { InventoryViewQuery } from './inventory-view.interface';
 
+import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
+import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
+
 import gql from 'graphql-tag';
 
 @Component({
+	moduleId: module.id,
     selector: 'inventory-view',
     template: `
-      <table *ngIf="!data.loading">
-        <tr>
-          <th>Name</th>
-          <th>SKU</th>
-          <th>Cost to Manufacture</th>
-          <th>Retail Price</th>
-          <th>Quantity</th>
-          <th *ngIf="editable"></th>
-        </tr>
-        <tr *ngFor="let product of data.shipment.inventory">
-          <product-short [sku]="product.sku"></product-short>
-          <th *ngIf="editable" (click)="delete(product)">Delete</th>
-        </tr>
-      </table>
+	<span class="subtitle">Products</span>
+    <md-list *ngIf="!data.loading" class="inventory-list">
+    	<md-list-item *ngFor="let product of data.products" [routerLink]="['/products', product.sku]">
+        		{{product.name}}
+        		<button md-icon-button (click)="delete(product)" *ngIf="editable">
+					<md-icon svgIcon="delete"></md-icon>
+				</button>
+		</md-list-item>
+    </md-list>
     `,
-    directives: [ProductShortComponent],
+	styleUrls: ['../home.component.css'],
+    directives: [ProductShortComponent, MdIcon, MD_LIST_DIRECTIVES],
+    providers: [MdIconRegistry]
 })
 @Apollo({
   client,
   queries: (component: InventoryViewComponent) => ({
     data: {
       query: gql`
-        query getInventory($id: String!) {
-          shipment(id: $id) {
-            inventory {
-              sku
-            }
+        query getInventory {
+          products {
+            sku
+			name
           }
         }
       `,
@@ -51,6 +51,10 @@ export class InventoryViewComponent {
     @Input() editable: boolean;
 
     data: InventoryViewQuery;
+
+	constructor(mdIconRegistry: MdIconRegistry) {
+  	  mdIconRegistry.addSvgIconSet('app/assets/icon-set.svg');
+    }
 
     delete(product) {
       // this.inventory.splice(this.inventory.indexOf(item), 1);

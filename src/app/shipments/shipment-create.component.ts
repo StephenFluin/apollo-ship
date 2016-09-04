@@ -8,15 +8,10 @@ import { client } from '../apollo-client-init';
 import gql from 'graphql-tag';
 
 @Component({
+	moduleId: module.id,
   selector: 'shipment-create',
-  template: `
-    <h2>New Shipment</h2>
-    <div class="content">
-      <shipment-select (select)="onShipmentSelect($event)" (deselect)="onShipmentDeselect($event)"></shipment-select>
-      <inventory-select (select)="onProductSelect($event)" (deselect)="onProductDeselect($event)"></inventory-select>
-      <button md-raised-button color="primary" (click)="save()">Create</button>
-    </div>
-  `,
+  templateUrl: 'shipment-create.component.html',
+  styleUrls: ['../home.component.css']
 })
 @Apollo({
   client,
@@ -51,6 +46,9 @@ export class ShipmentCreateComponent {
   selectedShipment: string;
   selectedProducts: Set<string> = new Set<string>();
   add: () => Promise<ApolloQueryResult>;
+  
+  lat: number = 37.418901;
+  lng: number =  -122.079767;
 
   constructor(private router: Router ) {}
 

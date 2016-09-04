@@ -23,7 +23,11 @@ const schema = [`
     revenue: Float
     captain: String
     origin: Location
+	originName: String
+	originCode: String
     destination: Location
+	destinationName: String
+	destinationCode: String
     currentLocation: Location
     inventory: [Product]
   }

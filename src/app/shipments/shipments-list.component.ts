@@ -11,17 +11,15 @@ import gql from 'graphql-tag';
 @Component({
   selector: 'shipments-list',
   template: `
-    <div *ngIf="!data.loading" style="display:flex;flex-wrap:wrap;">
-      <md-card *ngFor="let shipment of data.shipments" style="margin:16px;width:450px;">
-        <shipment-details
-          [shipmentId]="shipment.id"
-          [map]="false"
-          [editable]="false"
-          [link]="true">
-        </shipment-details>
-      </md-card>
-    </div>
+  	<md-list>
+		<a *ngFor="let shipment of data.shipments" [routerLink]="['/shipments', shipment.id]">
+		<md-list-item>
+			<shipment-simple [shipmentId]="shipment.id"></shipment-simple>
+		</md-list-item>
+		</a>
+	</md-list>
     `,
+	styleUrls: ['app/home.component.css']
 })
 @Apollo({
   client,

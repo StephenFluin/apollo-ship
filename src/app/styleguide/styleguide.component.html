@@ -64,6 +64,22 @@
 			<button md-button color="primary">Primary</button>
 			<button md-button color="secondary">Secondary</button>
 			<button md-button disabled>Disabled</button>
+
+			<md-fab-speed-dial>
+				<md-fab-trigger>
+			    	<button md-fab-button>
+						<md-icon svgIcon="add"></md-icon>
+					</button>
+				</md-fab-trigger>
+				<md-fab-actions>
+					<button md-fab-action>
+			    		<md-icon svgIcon="add"></md-icon>
+			    	</button>
+					<button md-fab-action>
+			      		<md-icon svgIcon="add"></md-icon>
+			    	</button>
+			  	</md-fab-actions>
+			</md-fab-speed-dial>
 		</div>
 	</section>
 
@@ -73,24 +89,67 @@
 
 			<md-list>
 				<md-list-item>
-					<h3 class="md-headline" md-line>Flight AMF1150</h3>
+					<h3 class="md-title" md-line>Flight AMF1150</h3>
 					<p md-line><strong>Captain:</strong> B190</p>
+
+					<div class="flight" md-line>
+						<span>Pittsburgh</span>
+						<span class="plane"><md-icon svgIcon="plane"></md-icon></span>
+						<span>Atlanta</span>
+					</div>
 				</md-list-item>
 
 				<md-divider></md-divider>
 
 				<md-list-item>
-					<h3 class="md-headline" md-line>Flight AMF1150</h3>
+					<h3 class="md-title" md-line>Flight AMF1150</h3>
 					<p md-line><strong>Captain:</strong> B190</p>
+
+					<div class="flight" md-line>
+						<span>Pittsburgh</span>
+						<span class="plane"><md-icon svgIcon="plane"></md-icon></span>
+						<span>Atlanta</span>
+					</div>
 				</md-list-item>
 
 				<md-divider></md-divider>
 
 				<md-list-item>
-					<h3 class="md-headline" md-line>Flight AMF1150</h3>
+					<h3 class="md-title" md-line>Flight AMF1150</h3>
 					<p md-line><strong>Captain:</strong> B190</p>
+
+					<div class="flight" md-line>
+						<span>Pittsburgh</span>
+						<span class="plane"><md-icon svgIcon="plane"></md-icon></span>
+						<span>Atlanta</span>
+					</div>
 				</md-list-item>
 			</md-list>
+		</div>
+	</section>
+
+	<section>
+		<div class="module">
+			<h2 class="md-title article-title">Form Elements</h2>
+
+			<md-input placeholder="Name"></md-input>
+
+			<md-input placeholder="Retail Price">
+				<span md-prefix>$</span>
+			</md-input>
+
+			<md-radio-group>
+				<md-radio-button value="1">Flight UWA642</md-radio-button>
+				<md-radio-button value="2">Flight TEA8712</md-radio-button>
+			</md-radio-group>
+		</div>
+	</section>
+
+	<section>
+		<div class="module">
+			<h2 class="md-title article-title">Map</h2>
+
+			<shipments-map [latitude]="lat" [longitude]="lng"></shipments-map>
 		</div>
 	</section>
 </md-content>

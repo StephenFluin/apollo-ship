@@ -1,0 +1,41 @@
+<div class="container">
+	  <main-header></main-header>
+	  <header class="page-header">
+		  <h2 class="md-headline">New Product</h2>
+	  </header>
+	  <md-content>
+		  <fab></fab>
+			<div class="content">
+				<div class="product-form">
+					<div class="input">
+						<span class="label">Name</span>
+						<md-input [(ngModel)]="product.name" placeholder="Name"></md-input>
+					</div>
+
+					<div class="input">
+						<span class="label">Cost to manufacture</span>
+						<md-input [(ngModel)]="product.costToManufacture" type="number" placeholder="Cost to manufacture">
+							<span md-prefix>$ </span>
+						</md-input>
+					</div>
+
+					<div class="input">
+						<span class="label">Retail price</span>
+						<md-input [(ngModel)]="product.retailPrice" type="number" placeholder="Retail price">
+							<span md-prefix>$ </span>
+						</md-input>
+					</div>
+
+					<div class="input">
+						<span class="label">Quantity</span>
+						<md-input [(ngModel)]="product.quantity" type="number" placeholder="Quantity"></md-input>
+					</div>
+
+					<button md-button color="primary" (click)="save()">Create</button>
+				</div>
+			</div>
+
+
+	  </md-content>
+  <shipments-map [latitude]="lat" [longitude]="lng"></shipments-map>
+</div>

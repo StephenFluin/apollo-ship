@@ -1,0 +1,37 @@
+<div class="container"  *ngIf="data.shipment && !data.loading">
+	  <main-header></main-header>
+	  <header class="page-header">
+		  <h2 class="md-headline">{{ data.shipment.name }}</h2>
+		  <p>Captain: {{ data.shipment.captain }}</p>
+	  </header>
+	  <md-content>
+			<div class="content">
+		 		<fab></fab>
+
+
+				<div class="flight" md-line>
+					<div class="flight-info origin">
+						<span>From</span>
+						<span class="airport-code">{{ data.shipment.originCode }}</span>
+						<span class="airport-name">{{ data.shipment.originName }}</span>
+					</div>
+					<span class="plane"><md-icon svgIcon="plane"></md-icon></span>
+					<div class="flight-info destination">
+						<span>To</span>
+						<span class="airport-code">{{ data.shipment.destinationCode }}</span>
+						<span class="airport-name">{{ data.shipment.destinationName }}</span>
+					</div>
+				</div>
+
+				<div class="shipment-revenue">
+					<span>Projected Revenue:</span>
+					<span class="revenue-number">{{ data.shipment.revenue / 100 | currency: 'USD' : 'true' }}</span>
+				</div>
+
+				<inventory-view [shipmentId]="shipmentId" [editable]="editable"></inventory-view>
+			</div>
+
+
+	  </md-content>
+  <shipment-map *ngIf="map" [shipmentId]="shipmentId" [latitude]="lat" [longitude]="lng"></shipment-map>
+</div>

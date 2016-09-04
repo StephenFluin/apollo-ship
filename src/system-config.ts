@@ -61,7 +61,7 @@ const packages: any = {
   'lodash.omit': {
     defaultExtension: 'js',
     main: 'index.js'
-  },
+  }
 };
 
 const materialPkgs:string[] = [
@@ -71,7 +71,8 @@ const materialPkgs:string[] = [
   'toolbar',
   'input',
   'icon',
-  'list'
+  'list',
+  'radio'
 ];
 
 materialPkgs.forEach((pkg) => {
@@ -141,6 +142,7 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/shipment-fragment',
   /** @cli-barrel */
 ];
 

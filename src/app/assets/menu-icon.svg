@@ -1,9 +1,0 @@
-<svg viewBox="0 0 100 65">
-    <title>menu-icon</title>
-    <defs></defs>
-    <g id="menu-icon">
-        <rect class="top" x="0" y="0" width="100" height="7" rx="3.5"></rect>
-        <rect id="middle" x="0" y="29" width="80" height="7" rx="3.5"></rect>
-        <rect id="bottom" x="0" y="58" width="60" height="7" rx="3.5"></rect>
-    </g>
-</svg>

@@ -34,6 +34,7 @@
     "@angular2-material/icon": "^2.0.0-alpha.7-4",
     "@angular2-material/input": "^2.0.0-alpha.7-2",
     "@angular2-material/list": "^2.0.0-alpha.7-4",
+    "@angular2-material/radio": "^2.0.0-alpha.7-4",
     "@angular2-material/toolbar": "^2.0.0-alpha.7-2",
     "angular2-apollo": "^0.4.0",
     "angular2-google-maps": "^0.13.0",

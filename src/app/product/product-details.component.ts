@@ -7,16 +7,10 @@ import { ProductDetailsQuery } from './product-details.interface';
 import gql from 'graphql-tag';
 
 @Component({
+	moduleId: module.id,
     selector: 'product-details',
-    template: `
-    <div *ngIf="!data.loading">
-        <h2>{{ data.product.name }}</h2>
-        <div>SKU: {{ data.product.sku }}</div>
-        <div>Cost to Manufacture: {{ data.product.costToManufacture / 100 | currency: 'USD' : 'true' }}</div>
-        <div>Retail Price: {{ data.product.retailPrice / 100 | currency: 'USD' : 'true' }}</div>
-    </div>
-    <fieldset>Other 3rd party information about product:</fieldset>
-    `,
+    templateUrl: 'product-details.component.html',
+	styleUrls: ['../home.component.css']
 })
 @Apollo({
   client,
@@ -41,4 +35,7 @@ export class ProductDetailsComponent {
   @Input() sku: string;
 
   data: ProductDetailsQuery;
+
+  lat: number = 37.418901;
+  lng: number =  -122.079767;
 }

@@ -4,18 +4,36 @@ import { Apollo } from 'angular2-apollo';
 import { client } from '../apollo-client-init';
 import { Shipment, ShipmentSelectQuery } from './shipment-select.interface';
 
+import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
+import { MdRadioModule } from '@angular2-material/radio';
+
 import gql from 'graphql-tag';
 
 @Component({
+	moduleId: module.id,
     selector: 'shipment-select',
     template: `
       <div *ngIf="data.loading">...</div>
       <div *ngIf="!data.loading">
-        <div *ngFor="let shipment of data.shipments">
-          <input type="radio" [checked]="selected === shipment" (change)="_toggle(shipment)" /> {{shipment.name}}
-        </div>
+		<md-expansion-panel>
+			<md-panel-select (click)="isOpen = !isOpen">
+		  		<span md-panel-title>Depart from</span>
+				<md-icon svgIcon="arrow" [class.open]="isOpen"></md-icon>
+			</md-panel-select>
+			<md-panel-options [class.open]="isOpen">
+				<md-radio-group [(value)]="groupValue">
+					<md-radio-button *ngFor="let shipment of data.shipments" [value]="shipment.name">
+						{{ shipment.originName }}
+					</md-radio-button>
+	          	</md-radio-group>
+			</md-panel-options>
+		</md-expansion-panel>
+
       </div>
     `,
+	styleUrls: ['../home.component.css'],
+	directives: [MdIcon],
+	providers: [MdIconRegistry]
 })
 @Apollo({
   client,
@@ -26,6 +44,8 @@ import gql from 'graphql-tag';
           shipments {
             id
             name
+			originName
+			destinationName
           }
         }
       `
@@ -38,6 +58,12 @@ export class ShipmentSelectComponent {
 
   data: ShipmentSelectQuery;
   selected: Shipment;
+
+  isOpen: boolean;
+
+  constructor(mdIconRegistry: MdIconRegistry) {
+	  mdIconRegistry.addSvgIconSet('app/assets/icon-set.svg');
+  }
 
   _select(shipment): void {
     this.selected = shipment;

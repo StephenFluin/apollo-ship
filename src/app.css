@@ -4,14 +4,117 @@
 }
 
 body {
-	font-family: 'Plan Grotesque Regular', sans-serif;
+	font-family: 'Neutral', sans-serif;
 	line-height: 1.7;
 	font-size: 16px;
 	color: #656565;
 	background: #fafafa;
 }
 
+a {
+	color: #24C8DE;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #1a1a1a;
+}
+
 [md-fab] span {
 	display: flex;
 	justify-content: center;
+}
+
+md-list .md-title {
+	margin: 0 !important;
+}
+
+md-list p {
+	color: #777;
+}
+
+.md-list-item {
+	height: auto !important;
+	padding: 0 !important;
+}
+
+.md-input-underline {
+	border-top: 1px solid #dedede !important;
+	display: none;
+}
+
+.md-input-underline .md-input-ripple {
+	background: #1a1a1a !important;
+}
+
+.md-input-placeholder.md-focused {
+	color: rgba(0, 0, 0, 0.38) !important;
+	transform: translate(-15px, calc(-100% - 15px)) scale(.75) !important;
+	font-weight: bold !important;
+}
+
+.md-radio-outer-circle {
+	border-color: #aaa !important;
+}
+
+.md-radio-checked .md-radio-outer-circle {
+	border-color: #8dc63f !important;
+}
+
+.md-radio-inner-circle {
+	background-color: #8dc63f !important;
+}
+
+.md-radio-focused .md-ink-ripple {
+	opacity: 0 !important;
+}
+
+.md-input-wrapper {
+	margin: 0 !important;
+}
+
+md-input label {
+	display: none !important;
+}
+
+@media screen and (min-width: 720px) {
+	body {
+		overflow: hidden;
+	}
+
+	sebm-google-map {
+		height: 100vh !important;
+	}
+}
+
+.md-radio-container {
+	display: none !important;
+}
+
+.md-radio-label-content {
+	padding: 0 !important;
+	display: block !important;
+	width: 100%;
+}
+
+.md-radio-label {
+	display: flex !important;
+}
+
+md-list {
+	padding-top: 0 !important;
+}
+
+.loading-header {
+	height: 55px;
+	background: #1a1a1a;
+}
+
+.inventory-list .md-list-item {
+	width: 100%;
+	justify-content: space-between;
+}
+
+shipments-map inventory-view {
+	display: none;
 }
