@@ -1,12 +1,8 @@
-import { Component, Injectable } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
-import { HTTP_PROVIDERS } from '@angular/http';
+import { Component } from '@angular/core';
+import { MdIconRegistry } from '@angular2-material/icon';
 
 @Component({
   selector: 'main-header',
-  moduleId: module.id,
   template: `
 	<div class="logo">
 		<a [routerLink]="['/']" class="logo-icon">
@@ -20,9 +16,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 		</div>
 	</div>
   `,
-  styleUrls: ['home.component.css'],
-  directives: [ROUTER_DIRECTIVES, MD_TOOLBAR_DIRECTIVES, MdIcon],
-  providers: [MdIconRegistry]
+  styleUrls: ['home.component.scss'],
 })
 
 export class HeaderComponent {

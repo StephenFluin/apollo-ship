@@ -10,7 +10,6 @@ import { MdRadioModule } from '@angular2-material/radio';
 import gql from 'graphql-tag';
 
 @Component({
-	moduleId: module.id,
     selector: 'inventory-select',
     template: `
       <div *ngIf="!data.loading">
@@ -29,9 +28,7 @@ import gql from 'graphql-tag';
 		</md-expansion-panel>
       </div>
     `,
-	styleUrls: ['../home.component.css'],
-	directives: [MdIcon],
-	providers: [MdIconRegistry]
+	styleUrls: ['../home.component.scss'],
 })
 @Apollo({
   client,

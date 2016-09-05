@@ -1,16 +1,19 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 
-import { GOOGLE_MAPS_PROVIDERS, provideLazyMapsAPILoaderConfig } from 'angular2-google-maps/core';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 import { HttpModule } from '@angular/http';
 
+import { MdCoreModule } from '@angular2-material/core';
 import { MdButtonModule } from '@angular2-material/button';
 import { MdCardModule } from '@angular2-material/card';
 import { MdInputModule } from '@angular2-material/input';
+import { MdIconModule } from '@angular2-material/icon';
+import { MdListModule } from '@angular2-material/list';
 import { MdToolbarModule } from '@angular2-material/toolbar';
 import { MdRadioModule } from '@angular2-material/radio';
 
@@ -44,7 +47,7 @@ import { ProductShortComponent } from './product/product-short.component';
     declarations: [
         AppComponent,
         HomeComponent,
-		HeaderComponent,
+        HeaderComponent,
         ShipmentCreateComponent,
         ShipmentViewComponent,
         InventoryViewComponent,
@@ -60,28 +63,30 @@ import { ProductShortComponent } from './product/product-short.component';
         ShipmentsListComponent,
         ShipmentShortWithDataComponent,
         ShipmentShortComponent,
-		ShipmentSimpleComponent,
+        ShipmentSimpleComponent,
         ProductDetailsComponent,
         ProductShortComponent,
-		StyleGuideComponent,
-		FABComponent
+        StyleGuideComponent,
+        FABComponent
     ],
-    imports:      [
+    imports: [
         BrowserModule,
-		HttpModule,
+        HttpModule,
         RouterModule.forRoot(routes),
         FormsModule,
-        MdButtonModule,
-        MdCardModule,
-        MdInputModule,
-        MdToolbarModule,
-		MdRadioModule
+        MdCoreModule.forRoot(),
+        MdButtonModule.forRoot(),
+        MdCardModule.forRoot(),
+        MdInputModule.forRoot(),
+        MdIconModule.forRoot(),
+        MdListModule.forRoot(),
+        MdToolbarModule.forRoot(),
+        MdRadioModule.forRoot(),
+        AgmCoreModule.forRoot({apiKey: 'AIzaSyDftIJkiHomAKsBYJp823yKFyc6ii-GM1U'})
     ],
-    bootstrap:    [AppComponent],
-    providers: [
-        GOOGLE_MAPS_PROVIDERS,
-		provideLazyMapsAPILoaderConfig({apiKey: 'AIzaSyDftIJkiHomAKsBYJp823yKFyc6ii-GM1U'})
-	],
-    //schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    bootstrap: [
+        AppComponent
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

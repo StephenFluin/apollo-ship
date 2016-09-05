@@ -1,19 +1,10 @@
-import { Component, Injectable } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
-import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
-import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
-import { HTTP_PROVIDERS } from '@angular/http';
+import { Component } from '@angular/core';
+import { MdIconRegistry } from '@angular2-material/icon';
 
 @Component({
   selector: 'home',
-  moduleId: module.id,
   templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
-  directives: [ROUTER_DIRECTIVES, MD_TOOLBAR_DIRECTIVES, MD_BUTTON_DIRECTIVES, MD_CARD_DIRECTIVES, MD_LIST_DIRECTIVES, MdIcon],
-  providers: [MdIconRegistry]
+  styleUrls: ['home.component.scss'],
 })
 
 export class HomeComponent {

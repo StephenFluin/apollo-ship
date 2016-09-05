@@ -9,10 +9,9 @@ import { Product } from '../shared/models';
 import gql from 'graphql-tag';
 
 @Component({
-	moduleId: module.id,
   selector: 'product-create',
   templateUrl: 'product-create.component.html',
-  styleUrls: ['../home.component.css']
+  styleUrls: ['../home.component.scss']
 })
 @Apollo({
   client,

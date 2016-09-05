@@ -69,7 +69,6 @@ class FlightAware {
 
 FlightAware.url = 'http://flightxml.flightaware.com/json/FlightXML2/';
 FlightAware.username = 'kamilkisiela';
-FlightAware.apiKey = '--api-key--';
 FlightAware.apiKey = 'bb7a17dbd26b86ccaf197a2b66add26b08909f7d';
 
 module.exports = FlightAware;

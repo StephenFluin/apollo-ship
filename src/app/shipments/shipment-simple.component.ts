@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Apollo } from 'angular2-apollo';
-
-import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
+import { MdIconRegistry } from '@angular2-material/icon';
 
 import { client } from '../apollo-client-init';
 import { ShipmentSimpleQuery } from './shipment-simple.interface';
@@ -25,9 +22,7 @@ import gql from 'graphql-tag';
     	</div>
 	</div>
     `,
-	styleUrls: ['app/home.component.css'],
-	directives: [ROUTER_DIRECTIVES, MD_LIST_DIRECTIVES, MdIcon],
-    providers: [MdIconRegistry]
+	styleUrls: ['../home.component.scss'],
 })
 @Apollo({
   client,
