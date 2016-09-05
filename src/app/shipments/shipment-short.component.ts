@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { ShipmentShort } from './shipment-short.interface';
 

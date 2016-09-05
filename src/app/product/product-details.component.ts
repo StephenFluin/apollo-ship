@@ -7,10 +7,9 @@ import { ProductDetailsQuery } from './product-details.interface';
 import gql from 'graphql-tag';
 
 @Component({
-	moduleId: module.id,
     selector: 'product-details',
     templateUrl: 'product-details.component.html',
-	styleUrls: ['../home.component.css']
+	styleUrls: ['../home.component.scss']
 })
 @Apollo({
   client,

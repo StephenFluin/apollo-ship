@@ -8,10 +8,9 @@ import { client } from '../apollo-client-init';
 import gql from 'graphql-tag';
 
 @Component({
-	moduleId: module.id,
   selector: 'shipment-create',
   templateUrl: 'shipment-create.component.html',
-  styleUrls: ['../home.component.css']
+  styleUrls: ['../home.component.scss']
 })
 @Apollo({
   client,

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Apollo } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
@@ -19,7 +18,7 @@ import gql from 'graphql-tag';
 		</a>
 	</md-list>
     `,
-	styleUrls: ['app/home.component.css']
+	styleUrls: ['../home.component.scss']
 })
 @Apollo({
   client,

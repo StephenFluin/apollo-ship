@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GOOGLE_MAPS_DIRECTIVES, MapTypeStyle } from 'angular2-google-maps/core';
+import { MapTypeStyle } from 'angular2-google-maps/core';
 import { Apollo } from 'angular2-apollo';
 
 import { client } from '../apollo-client-init';
@@ -24,9 +24,6 @@ import gql from 'graphql-tag';
       </sebm-google-map-marker>
     </sebm-google-map>
     `,
-  directives: [
-    GOOGLE_MAPS_DIRECTIVES,
-  ],
 })
 @Apollo({
   client,

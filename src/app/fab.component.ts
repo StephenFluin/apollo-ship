@@ -1,12 +1,8 @@
-import { Component, Injectable, Renderer, ElementRef } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
-import { HTTP_PROVIDERS } from '@angular/http';
+import { Component } from '@angular/core';
+import { MdIconRegistry } from '@angular2-material/icon';
 
 @Component({
   selector: 'fab',
-  moduleId: module.id,
   template: `
 	<md-fab-speed-dial>
 		<md-fab-trigger>
@@ -24,9 +20,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 		</md-fab-actions>
 	</md-fab-speed-dial>
   `,
-  styleUrls: ['home.component.css'],
-  directives: [ROUTER_DIRECTIVES, MD_BUTTON_DIRECTIVES, MdIcon],
-  providers: [MdIconRegistry]
+  styleUrls: ['home.component.scss'],
 })
 
 export class FABComponent {

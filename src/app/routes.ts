@@ -1,4 +1,4 @@
-import { RouterConfig } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { ShipmentViewComponent } from './shipments/shipment-view.component';
@@ -9,7 +9,7 @@ import { ProductViewComponent } from './product/product-view.component';
 import { StyleGuideComponent } from './styleguide/styleguide-view.component';
 
 
-export const routes: RouterConfig = [
+export const routes: Routes = [
   { path: '',                 component: HomeComponent },
   { path: 'shipments/create', component: ShipmentCreateComponent },
   { path: 'shipments/:id',    component: ShipmentViewComponent },

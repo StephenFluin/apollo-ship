@@ -1,12 +1,7 @@
-import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Component, Input } from '@angular/core';
 import { Apollo } from 'angular2-apollo';
 
-import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
-import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
-import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
-import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
+import { MdIconRegistry } from '@angular2-material/icon';
 
 import { client } from '../apollo-client-init';
 import { ShipmentDetailsQuery } from './shipment-details.interface';
@@ -14,12 +9,9 @@ import { ShipmentDetailsQuery } from './shipment-details.interface';
 import gql from 'graphql-tag';
 
 @Component({
-	moduleId: module.id,
   selector: 'shipment-details',
   templateUrl: 'shipment-details.component.html',
-	styleUrls: ['../home.component.css'],
-	directives: [ROUTER_DIRECTIVES, MD_TOOLBAR_DIRECTIVES, MD_BUTTON_DIRECTIVES, MD_CARD_DIRECTIVES, MD_LIST_DIRECTIVES, MdIcon],
-    providers: [MdIconRegistry]
+	styleUrls: ['../home.component.scss'],
 })
 @Apollo({
   client,
